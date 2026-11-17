@@ -1,0 +1,2488 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#fdf8f2" />
+<title>مرکز مشاوره نگاهی نو | خانه‌ای برای دید تازه</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --primary:#e07856;--primary-2:#ec9b7a;--primary-3:#c9624a;
+    --accent:#7ba098;--gold:#e9b44c;--rose:#e8a0a0;
+    --ink:#33261c;--ink-2:#4a3829;--muted:#8a7565;
+    --line:#efe3d5;--bg:#fdf8f2;--bg-2:#faf2e8;
+    --ok:#3f9b7d;--warn:#d99a3a;
+    --shadow-lg:0 24px 60px rgba(180,120,80,.20);
+    --shadow-md:0 14px 44px rgba(80,50,30,.10);
+    --shadow-sm:0 6px 20px rgba(80,50,30,.07);
+    --ease:cubic-bezier(.2,.8,.2,1);
+  }
+  html{scroll-behavior:smooth}
+  html,body{overflow-x:hidden}
+  body{
+    font-family:'Vazirmatn',system-ui,sans-serif;
+    background:
+      radial-gradient(900px 620px at 92% -10%, #fce7d3 0%, transparent 60%),
+      radial-gradient(760px 560px at -10% 12%, #f5e5d4 0%, transparent 55%),
+      radial-gradient(720px 520px at 55% 118%, #f6dccd 0%, transparent 60%),
+      var(--bg);
+    min-height:100vh;color:var(--ink);line-height:1.95;
+    -webkit-font-smoothing:antialiased;position:relative;
+    transition:background 1.2s var(--ease);
+  }
+  body,.nav,.btn,.t-card,.w-card,.c-card,.quick-card,.faq-item,.sum-box,.chip,.asst,.msg.bot{
+    transition-property:background-color,border-color,color,box-shadow,background;
+    transition-duration:.7s;transition-timing-function:var(--ease);
+  }
+  a{color:inherit;text-decoration:none}
+  button{font-family:inherit}
+  .bg-orbs{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+  .orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:.5;animation:orbFloat 26s ease-in-out infinite}
+  .orb.o1{width:420px;height:420px;background:#f9d6b8;top:-120px;right:-100px}
+  .orb.o2{width:340px;height:340px;background:#f4c6b0;bottom:-100px;left:-100px;animation-delay:-8s}
+  .orb.o3{width:280px;height:280px;background:#e7d1c2;top:45%;left:60%;animation-delay:-15s}
+  .orb.o4{width:240px;height:240px;background:#dfeae3;top:20%;left:8%;animation-delay:-4s;opacity:.35}
+  @keyframes orbFloat{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(-34px,28px) scale(1.08)}66%{transform:translate(28px,-24px) scale(.94)}}
+
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+  .reveal.in{opacity:1;transform:none}
+  .reveal.d1{transition-delay:.08s}.reveal.d2{transition-delay:.16s}.reveal.d3{transition-delay:.24s}.reveal.d4{transition-delay:.32s}
+
+  .nav{position:sticky;top:0;z-index:120;background:rgba(253,248,242,.85);backdrop-filter:blur(18px);border-bottom:1px solid rgba(239,227,213,.9)}
+  .nav-inner{max-width:1160px;margin:0 auto;padding:11px 20px;display:flex;align-items:center;gap:14px}
+  .brand{display:flex;align-items:center;gap:11px;flex-shrink:0}
+  .brand-logo{width:46px;height:46px;border-radius:15px;background:linear-gradient(135deg,var(--primary),var(--gold));display:grid;place-items:center;font-size:22px;color:#fff;box-shadow:0 10px 26px rgba(224,120,86,.4);animation:breathe 4s ease-in-out infinite}
+  @keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+  .brand-text b{display:block;font-size:15.5px;font-weight:800;line-height:1.5;color:var(--ink)}
+  .brand-text span{font-size:11px;color:var(--muted)}
+  .nav-links{display:flex;gap:2px;margin-inline-start:auto}
+  .nav-links a{font-size:13px;font-weight:600;color:#5c4a3b;padding:9px 12px;border-radius:11px;transition:.22s}
+  .nav-links a:hover{background:#fbeadb;color:var(--primary-3)}
+  .nav-util{display:flex;gap:6px;margin-inline-start:8px}
+  .nav-icon{width:40px;height:40px;border-radius:12px;background:#fbeadb;border:none;color:#5c4a3b;font-size:17px;cursor:pointer;display:grid;place-items:center;transition:.22s}
+  .nav-icon:hover{background:#f5d4be;color:var(--primary-3)}
+  .nav-icon.active{background:linear-gradient(135deg,var(--primary),var(--primary-3));color:#fff}
+  .nav-cta{padding:10px 20px!important;font-size:13px!important;border-radius:12px!important}
+  .nav-burger{display:none;background:#fbeadb;border:none;width:44px;height:44px;border-radius:12px;font-size:18px;cursor:pointer;color:var(--primary-3)}
+  .mobile-menu{display:none;flex-direction:column;gap:4px;padding:0 20px 14px;border-bottom:1px solid var(--line)}
+  .mobile-menu.open{display:flex}
+  .mobile-menu a{padding:11px 12px;border-radius:10px;font-size:14px;font-weight:600;color:#5c4a3b}
+  .mobile-menu a:hover{background:#fbeadb}
+
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 26px;border-radius:14px;border:none;font-size:14.5px;font-weight:700;cursor:pointer;transition:.28s var(--ease);position:relative;overflow:hidden}
+  .btn-primary{background:linear-gradient(135deg,var(--primary),var(--primary-3));background-size:200% 200%;color:#fff;box-shadow:0 12px 30px rgba(224,120,86,.38);animation:gradientShift 8s ease infinite}
+  @keyframes gradientShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+  .btn-primary::after{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.45),transparent);transform:skewX(-20deg);transition:left .65s var(--ease)}
+  .btn-primary:hover::after{left:130%}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 18px 42px rgba(224,120,86,.5)}
+  .btn-ghost{background:#f5ebdf;color:#5c4a3b}
+  .btn-ghost:hover{background:#ede0d0;transform:translateY(-2px)}
+  .btn-danger{background:#fdeeee;color:#b84848;border:1px solid #f3cccc}
+  .btn-danger:hover{background:#fadada}
+  .btn:active{transform:translateY(0) scale(.98)}
+  .btn:disabled{opacity:.65;cursor:not-allowed;transform:none!important}
+  .btn-block{width:100%}
+
+  .sec{max-width:1160px;margin:0 auto;padding:76px 20px;position:relative;z-index:1}
+  .sec-head{text-align:center;margin-bottom:40px}
+  .pill{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;color:var(--primary-3);background:linear-gradient(135deg,#fbeadb,#f7dcc7);padding:7px 16px;border-radius:99px;margin-bottom:14px;border:1px solid #f4d4bd}
+  .sec-head h2{font-size:29px;font-weight:900;letter-spacing:-.4px;line-height:1.6;color:var(--ink)}
+  .sec-head p{color:var(--muted);font-size:14.5px;margin-top:8px;max-width:620px;margin-inline:auto}
+
+  .hero{max-width:1160px;margin:0 auto;padding:60px 20px 44px;position:relative;z-index:1}
+  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:38px;align-items:center}
+  .hero-copy h1{font-size:39px;font-weight:900;line-height:1.45;letter-spacing:-.8px;margin-bottom:16px;color:var(--ink)}
+  .hero-copy h1 em{font-style:normal;background:linear-gradient(135deg,var(--primary),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero-copy p{color:var(--muted);font-size:15.5px;max-width:520px;margin-bottom:26px}
+  .hero .btn-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:30px}
+  .stats{display:flex;gap:26px;flex-wrap:wrap}
+  .stat b{display:block;font-size:23px;font-weight:900;color:var(--primary-3);line-height:1.3}
+  .stat span{font-size:12px;color:var(--muted);font-weight:600}
+  .quick-card{background:rgba(255,255,255,.9);backdrop-filter:blur(18px);border:1px solid rgba(244,212,189,.7);border-radius:26px;box-shadow:var(--shadow-lg);padding:28px 24px;position:relative;overflow:hidden}
+  .quick-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--primary),var(--gold),var(--primary-3))}
+  .quick-card h3{font-size:16px;font-weight:800;margin-bottom:4px;color:var(--ink)}
+  .quick-card > p{font-size:12.5px;color:var(--muted);margin-bottom:16px}
+  .quick-row{display:flex;align-items:center;gap:12px;padding:14px 15px;border-radius:15px;border:1.5px solid var(--line);background:#fff;margin-bottom:10px;cursor:pointer;transition:.25s var(--ease);text-align:right;width:100%}
+  .quick-row:hover{border-color:#f0b99e;background:#fffaf5;transform:translateX(-4px);box-shadow:var(--shadow-sm)}
+  .quick-row .qi{width:40px;height:40px;border-radius:12px;background:#fbeadb;display:grid;place-items:center;font-size:19px;flex-shrink:0}
+  .quick-row b{display:block;font-size:13.5px;font-weight:800;line-height:1.5;color:var(--ink)}
+  .quick-row small{font-size:11.5px;color:var(--muted)}
+  .quick-row .ar{margin-inline-start:auto;color:var(--primary-2);font-weight:900;font-size:20px}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(265px,1fr));gap:20px}
+  .t-card{background:#fff;border:1.5px solid var(--line);border-radius:22px;padding:24px 22px;transition:.35s var(--ease);position:relative;overflow:hidden;display:flex;flex-direction:column}
+  .t-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-md);border-color:#f0b99e}
+  .t-card::after{content:'';position:absolute;top:-45%;left:-45%;width:90%;height:90%;background:radial-gradient(circle,rgba(224,120,86,.10),transparent 70%);pointer-events:none}
+  .t-head{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+  .t-photo-wrap{position:relative;flex-shrink:0}
+  .t-photo{width:66px;height:66px;border-radius:50%;object-fit:cover;border:3px solid #fff;box-shadow:0 8px 22px rgba(180,120,80,.28);background:#f5ebdf;display:block}
+  .t-online{position:absolute;bottom:2px;left:2px;width:14px;height:14px;border-radius:50%;background:var(--ok);border:2.5px solid #fff}
+  .t-head h3{font-size:15px;font-weight:900;line-height:1.6;color:var(--ink)}
+  .t-head small{font-size:11.5px;color:var(--muted);display:block;margin-top:2px}
+  .rate{margin-inline-start:auto;font-size:12px;font-weight:800;color:#a86a1f;background:#fdf3dd;border:1px solid #f4dcab;border-radius:99px;padding:3px 9px;white-space:nowrap}
+  .voice-btn{display:inline-flex;align-items:center;gap:6px;margin-top:6px;padding:6px 12px;border-radius:99px;background:#f0f7f4;border:1px solid #cfe4d8;color:#2f8a67;font-size:11px;font-weight:700;cursor:pointer;transition:.22s;font-family:inherit}
+  .voice-btn:hover{background:#e0f2ea;transform:translateY(-1px)}
+  .voice-btn.playing{background:linear-gradient(135deg,#3f9b7d,#5fb394);color:#fff;border-color:transparent}
+  .voice-btn.playing .wave{animation:pulse 1s ease infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+  .tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+  .tag{font-size:11px;font-weight:700;color:#6b5442;background:#f7ecdf;padding:4px 11px;border-radius:99px}
+  .t-bio{font-size:12.5px;color:var(--muted);line-height:1.9;margin-bottom:14px;flex:1}
+  .t-foot{display:flex;align-items:center;gap:10px;padding-top:14px;border-top:1px dashed var(--line)}
+  .price{font-size:13.5px;font-weight:900;color:var(--primary-3)}
+  .price small{font-size:10.5px;font-weight:600;color:var(--muted)}
+  .t-foot .btn{margin-inline-start:auto;padding:10px 18px;font-size:12.5px;border-radius:11px}
+
+  .w-card{background:#fff;border:1.5px solid var(--line);border-radius:22px;padding:0;overflow:hidden;transition:.35s var(--ease);display:flex;flex-direction:column}
+  .w-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-md);border-color:#f0b99e}
+  .w-top{padding:20px;background:linear-gradient(135deg,#fbeadb,#fce9d5);display:flex;align-items:center;gap:13px;position:relative;overflow:hidden}
+  .w-top::after{content:'';position:absolute;width:130px;height:130px;border-radius:50%;background:rgba(255,255,255,.55);top:-60px;left:-40px}
+  .w-emoji{width:54px;height:54px;border-radius:16px;background:#fff;display:grid;place-items:center;font-size:26px;flex-shrink:0;box-shadow:0 8px 18px rgba(224,120,86,.18);position:relative;z-index:1}
+  .w-top h3{font-size:15px;font-weight:900;line-height:1.6;position:relative;z-index:1;color:var(--ink)}
+  .w-top small{font-size:11.5px;color:var(--primary-3);font-weight:700;position:relative;z-index:1}
+  .w-body{padding:18px 20px 20px;display:flex;flex-direction:column;flex:1}
+  .w-bio{font-size:12.5px;color:var(--muted);line-height:1.9;margin-bottom:14px;flex:1}
+  .w-meta{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+  .w-meta span{font-size:11.5px;font-weight:700;color:#5c4a3b;background:#faf5ee;border:1px solid var(--line);padding:5px 11px;border-radius:9px}
+  .cap{margin-bottom:14px}
+  .cap-top{display:flex;justify-content:space-between;font-size:11.5px;font-weight:700;color:var(--muted);margin-bottom:6px}
+  .cap-bar{height:7px;background:#f3e8db;border-radius:99px;overflow:hidden}
+  .cap-bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--primary),var(--gold));transition:width 1s var(--ease)}
+  .cap-bar.full i{background:linear-gradient(90deg,#d66262,#d99a3a)}
+  .w-foot{display:flex;align-items:center;gap:10px;padding-top:14px;border-top:1px dashed var(--line)}
+  .w-foot .btn{margin-inline-start:auto;padding:10px 18px;font-size:12.5px;border-radius:11px}
+
+  .stories-wrap{position:relative;overflow:hidden;margin:0 -20px;padding:0 20px}
+  .stories-scroll{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;padding:8px 4px 24px;scrollbar-width:none}
+  .stories-scroll::-webkit-scrollbar{display:none}
+  .story{flex:0 0 340px;scroll-snap-align:center;background:#fff;border:1.5px solid var(--line);border-radius:24px;padding:26px 24px;position:relative;overflow:hidden;min-height:340px;display:flex;flex-direction:column;cursor:pointer;transition:.35s var(--ease)}
+  .story:hover{transform:translateY(-4px);box-shadow:var(--shadow-md);border-color:#f0b99e}
+  .story-illus{width:100%;height:120px;border-radius:18px;margin-bottom:16px;display:grid;place-items:center;font-size:52px;position:relative;overflow:hidden}
+  .story-illus::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.4),transparent 60%)}
+  .story-tag{font-size:10.5px;font-weight:800;color:var(--primary-3);background:#fbeadb;padding:3px 10px;border-radius:99px;align-self:flex-start;margin-bottom:10px}
+  .story h3{font-size:15px;font-weight:900;margin-bottom:8px;line-height:1.7;color:var(--ink)}
+  .story p{font-size:12.5px;color:var(--muted);line-height:2;flex:1}
+  .story-who{font-size:11px;font-weight:700;color:#a86a1f;margin-top:14px;padding-top:12px;border-top:1px dashed var(--line)}
+  .scroll-hint{display:flex;justify-content:center;gap:6px;margin-top:6px;font-size:11px;color:var(--muted)}
+
+  .wall-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px;margin-bottom:22px}
+  .wall-note{background:linear-gradient(135deg,#fffaf5,#fdf4ea);border:1.5px solid var(--line);border-radius:18px;padding:20px 22px;position:relative;transition:.3s var(--ease);font-size:13px;line-height:2;color:#4a3829}
+  .wall-note:hover{transform:translateY(-3px) rotate(-.4deg);box-shadow:var(--shadow-sm);border-color:#f0b99e}
+  .wall-note::before{content:'❞';position:absolute;top:8px;right:14px;font-size:28px;color:var(--primary-2);opacity:.35;font-family:serif}
+  .wall-note small{display:block;font-size:11px;color:var(--muted);margin-top:10px;font-weight:700}
+  .wall-form{background:#fff;border:1.5px dashed #f0b99e;border-radius:18px;padding:18px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .wall-form input{flex:1;min-width:200px;border:1.5px solid var(--line);border-radius:12px;padding:11px 14px;font-family:inherit;font-size:13px;background:#fdf8f2;outline:none;transition:.22s}
+  .wall-form input:focus{border-color:var(--primary);background:#fff;box-shadow:0 0 0 3px rgba(224,120,86,.13)}
+  .wall-form button{white-space:nowrap;padding:11px 22px;font-size:13px}
+
+  .letter-card{background:linear-gradient(135deg,#fffaf5,#fbeadb);border:1.5px solid #f4d4bd;border-radius:26px;padding:32px 28px;position:relative;overflow:hidden;text-align:center}
+  .letter-card::before{content:'✉️';position:absolute;top:-20px;left:-10px;font-size:80px;opacity:.12;transform:rotate(-15deg)}
+  .letter-card h3{font-size:20px;font-weight:900;margin-bottom:8px;color:var(--ink)}
+  .letter-card p{font-size:13px;color:var(--muted);margin-bottom:20px;line-height:1.9}
+  .letter-form{display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:560px;margin:0 auto 14px}
+  .letter-form input,.letter-form textarea{width:100%;border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;font-family:inherit;font-size:13px;background:#fff;outline:none;transition:.22s;color:var(--ink)}
+  .letter-form input:focus,.letter-form textarea:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(224,120,86,.13)}
+  .letter-form textarea{grid-column:1/-1;min-height:90px;resize:vertical;line-height:1.9}
+  .letter-form .btn{grid-column:1/-1}
+
+  .journal-card{background:#fff;border:1.5px solid var(--line);border-radius:24px;padding:26px 24px}
+  .journal-head{display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+  .journal-head b{font-size:15px;font-weight:900;color:var(--ink)}
+  .journal-head small{font-size:11.5px;color:var(--muted);display:block}
+  .journal-mood-badge{margin-inline-start:auto;font-size:11.5px;font-weight:800;color:var(--primary-3);background:#fbeadb;padding:6px 14px;border-radius:99px}
+  .journal-input-row{display:flex;gap:8px;margin-bottom:18px}
+  .journal-input-row input{flex:1;border:1.5px solid var(--line);border-radius:13px;padding:12px 15px;font-family:inherit;font-size:13px;background:#fdf8f2;outline:none;transition:.22s;min-width:0}
+  .journal-input-row input:focus{border-color:var(--primary);background:#fff;box-shadow:0 0 0 3px rgba(224,120,86,.13)}
+  .journal-input-row button{padding:12px 20px;font-size:13px;flex-shrink:0}
+  .journal-chart{display:flex;align-items:flex-end;gap:5px;height:100px;padding:10px 0;border-top:1px dashed var(--line)}
+  .jbar{flex:1;min-height:6px;border-radius:6px 6px 2px 2px;background:linear-gradient(to top,var(--primary),var(--gold));transition:height .6s var(--ease),opacity .3s;position:relative;cursor:default}
+  .jbar:hover{opacity:.85}
+  .jbar:hover::after{content:attr(data-tip);position:absolute;bottom:100%;left:50%;transform:translateX(-50%);background:#33261c;color:#fff;font-size:10px;padding:4px 8px;border-radius:6px;white-space:nowrap;margin-bottom:4px;font-family:'Vazirmatn'}
+  .journal-stats{display:flex;justify-content:space-between;font-size:11.5px;color:var(--muted);margin-top:8px;font-weight:700}
+  .journal-empty{text-align:center;padding:20px;color:var(--muted);font-size:13px;line-height:1.9}
+
+  .faq{max-width:800px;margin:0 auto}
+  .faq-item{background:#fff;border:1.5px solid var(--line);border-radius:17px;margin-bottom:10px;overflow:hidden;transition:.3s var(--ease)}
+  .faq-item.open{border-color:#f0b99e;box-shadow:var(--shadow-sm)}
+  .faq-q{width:100%;background:none;border:none;text-align:right;cursor:pointer;padding:17px 20px;font-size:14px;font-weight:800;color:var(--ink);display:flex;align-items:center;gap:10px}
+  .faq-q span{margin-inline-start:auto;color:var(--primary);font-size:18px;transition:.35s var(--ease)}
+  .faq-item.open .faq-q span{transform:rotate(45deg)}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .38s var(--ease);font-size:13px;color:var(--muted);line-height:2}
+  .faq-a div{padding:0 20px 18px}
+
+  .contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+  .c-card{background:#fff;border:1.5px solid var(--line);border-radius:20px;padding:24px 20px;text-align:center;transition:.3s var(--ease)}
+  .c-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-sm);border-color:#f0b99e}
+  .c-card .ci{width:54px;height:54px;border-radius:16px;margin:0 auto 12px;background:linear-gradient(135deg,#fbeadb,#fce9d5);display:grid;place-items:center;font-size:24px}
+  .c-card b{display:block;font-size:13.5px;margin-bottom:4px;color:var(--ink)}
+  .c-card span{font-size:12.5px;color:var(--muted)}
+
+  footer{text-align:center;font-size:12px;color:#b4a08e;padding:36px 20px 40px;position:relative;z-index:1;border-top:1px solid rgba(239,227,213,.8)}
+
+  .mood-screen{position:fixed;inset:0;z-index:800;background:linear-gradient(160deg,#fdf8f2,#fbeadb 60%,#f5e5d4);display:grid;place-items:center;padding:24px;opacity:0;pointer-events:none;transition:opacity .6s var(--ease)}
+  .mood-screen.show{opacity:1;pointer-events:auto}
+  .mood-inner{max-width:640px;width:100%;text-align:center}
+  .mood-inner h2{font-size:26px;font-weight:900;margin-bottom:8px;color:var(--ink);animation:moodUp .8s var(--ease) both}
+  .mood-inner p{font-size:14px;color:var(--muted);margin-bottom:28px;animation:moodUp .8s .1s var(--ease) both}
+  @keyframes moodUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+  .mood-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:22px}
+  .mood-btn{background:#fff;border:1.5px solid var(--line);border-radius:20px;padding:20px 12px;cursor:pointer;transition:.32s var(--ease);font-family:inherit;display:flex;flex-direction:column;align-items:center;gap:8px;animation:moodUp .6s var(--ease) both}
+  .mood-btn:hover{transform:translateY(-6px) scale(1.02);box-shadow:var(--shadow-md);border-color:#f0b99e}
+  .mood-btn:active{transform:scale(.97)}
+  .mood-btn .emo{font-size:38px;line-height:1;display:block;transition:transform .3s}
+  .mood-btn:hover .emo{transform:scale(1.15) rotate(-5deg)}
+  .mood-btn b{font-size:13px;font-weight:800;color:var(--ink)}
+  .mood-btn small{font-size:10.5px;color:var(--muted)}
+  .mood-skip{font-size:12px;color:var(--muted);background:none;border:none;cursor:pointer;text-decoration:underline;padding:8px;font-family:inherit}
+
+  .calm-launcher{position:fixed;bottom:calc(20px + env(safe-area-inset-bottom));left:96px;z-index:300;width:60px;height:60px;border-radius:22px;border:none;cursor:pointer;background:linear-gradient(135deg,#88b0a0,#5f9484);color:#fff;font-size:26px;display:grid;place-items:center;box-shadow:0 16px 38px rgba(95,148,132,.45);transition:.32s var(--ease)}
+  .calm-launcher:hover{transform:translateY(-4px) scale(1.05)}
+  .calm-launcher.hide{transform:scale(0);opacity:0;pointer-events:none}
+  .calm-panel{position:fixed;inset:0;z-index:340;display:none;place-items:center;padding:20px;background:rgba(51,38,28,.5);backdrop-filter:blur(6px)}
+  .calm-panel.open{display:grid;animation:fadeIn .3s ease}
+  .calm-box{background:#fff;border-radius:28px;width:100%;max-width:480px;max-height:92vh;overflow-y:auto;box-shadow:0 40px 90px rgba(51,38,28,.4);animation:modalIn .45s var(--ease);position:relative}
+  .calm-head{padding:20px 22px;background:linear-gradient(135deg,#88b0a0,#5f9484);color:#fff;border-radius:28px 28px 0 0;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:2}
+  .calm-head b{font-size:15px;font-weight:900;display:block}
+  .calm-head small{font-size:11px;opacity:.9}
+  .calm-close{margin-inline-start:auto;background:rgba(255,255,255,.22);border:none;color:#fff;width:42px;height:42px;border-radius:12px;cursor:pointer;font-size:18px;display:grid;place-items:center;transition:.2s;flex-shrink:0}
+  .calm-close:hover{background:rgba(255,255,255,.4)}
+  .calm-tabs{display:flex;gap:4px;padding:14px 16px 8px;border-bottom:1px solid var(--line);overflow-x:auto;scrollbar-width:none}
+  .calm-tabs::-webkit-scrollbar{display:none}
+  .calm-tab{padding:9px 14px;border-radius:11px;background:none;border:none;font-family:inherit;font-size:12.5px;font-weight:700;color:var(--muted);cursor:pointer;transition:.22s;white-space:nowrap}
+  .calm-tab.active{background:linear-gradient(135deg,#88b0a0,#5f9484);color:#fff}
+  .calm-body{padding:22px}
+
+  .breath-stage{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:320px;padding:10px}
+  .breath-ring{position:relative;width:200px;height:200px;margin-bottom:24px;display:grid;place-items:center}
+  .breath-ring::before{content:'';position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle,#c8e0d5,#88b0a0);opacity:.85;transform:scale(0.5);transition:transform 4s linear;box-shadow:0 12px 40px rgba(95,148,132,.4)}
+  .breath-ring.inhale::before{transform:scale(1);transition-duration:4s}
+  .breath-ring.hold::before{transform:scale(1);transition-duration:0s}
+  .breath-ring.exhale::before{transform:scale(0.5);transition-duration:8s}
+  .breath-ring .counter{position:relative;z-index:1;font-size:36px;font-weight:900;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.15)}
+  .breath-ring .counter small{font-size:13px;font-weight:600;display:block;opacity:.9;margin-top:4px}
+  .breath-label{font-size:15px;font-weight:800;color:var(--ink);margin-bottom:6px;min-height:26px;transition:.3s}
+  .breath-cycle{font-size:11.5px;color:var(--muted);margin-bottom:20px}
+
+  .ground-step{background:#fdf8f2;border:1.5px solid var(--line);border-radius:16px;padding:18px;margin-bottom:12px}
+  .ground-step h4{font-size:13.5px;font-weight:800;color:var(--ink);margin-bottom:6px}
+  .ground-step p{font-size:12px;color:var(--muted);line-height:1.9;margin-bottom:10px}
+  .ground-inputs{display:flex;flex-direction:column;gap:6px}
+  .ground-inputs input{border:1.5px solid var(--line);border-radius:10px;padding:8px 12px;font-family:inherit;font-size:12.5px;background:#fff;outline:none;transition:.2s}
+  .ground-inputs input:focus{border-color:var(--primary);box-shadow:0 0 0 2px rgba(224,120,86,.1)}
+
+  .amb-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .amb-btn{background:#fdf8f2;border:1.5px solid var(--line);border-radius:16px;padding:18px 12px;cursor:pointer;transition:.28s var(--ease);font-family:inherit;display:flex;flex-direction:column;align-items:center;gap:8px}
+  .amb-btn:hover{transform:translateY(-3px);border-color:#a8c0b8;box-shadow:var(--shadow-sm)}
+  .amb-btn.active{background:linear-gradient(135deg,#88b0a0,#5f9484);color:#fff;border-color:transparent}
+  .amb-btn .amb-emo{font-size:32px}
+  .amb-btn b{font-size:12.5px;font-weight:800}
+  .amb-btn small{font-size:10.5px;opacity:.75}
+
+  .quote-stage{padding:20px 8px;text-align:center}
+  .quote-mark{font-size:42px;color:var(--primary-2);line-height:1;margin-bottom:8px;font-family:serif}
+  .quote-text{font-size:16px;font-weight:700;color:var(--ink);line-height:2.1;margin-bottom:16px;min-height:80px}
+  .quote-author{font-size:12px;color:var(--primary-3);font-weight:800;margin-bottom:20px}
+  .quote-refresh{background:#fbeadb;border:none;color:var(--primary-3);padding:10px 20px;border-radius:12px;font-family:inherit;font-size:12.5px;font-weight:700;cursor:pointer;transition:.22s}
+  .quote-refresh:hover{background:#f5d4be;transform:translateY(-2px)}
+
+  .tour-screen{position:fixed;inset:0;z-index:700;background:rgba(253,248,242,.97);backdrop-filter:blur(10px);display:grid;place-items:center;padding:24px;opacity:0;pointer-events:none;transition:opacity .5s var(--ease)}
+  .tour-screen.show{opacity:1;pointer-events:auto}
+  .tour-card{max-width:520px;width:100%;text-align:center;padding:32px 24px}
+  .tour-illus{width:110px;height:110px;border-radius:50%;background:linear-gradient(135deg,#fbeadb,#f5d4be);display:grid;place-items:center;font-size:48px;margin:0 auto 22px;animation:pop .6s var(--ease)}
+  .tour-card h3{font-size:22px;font-weight:900;margin-bottom:10px;color:var(--ink);min-height:34px}
+  .tour-card p{font-size:14px;color:var(--muted);line-height:2;margin-bottom:24px;min-height:56px}
+  .tour-dots{display:flex;justify-content:center;gap:6px;margin-bottom:22px}
+  .tour-dots i{width:8px;height:8px;border-radius:50%;background:#e8d5c0;transition:.3s}
+  .tour-dots i.on{background:var(--primary);width:22px;border-radius:99px}
+  .tour-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+
+  .privacy-page{position:fixed;inset:0;z-index:1000;background:#fff;display:none;overflow-y:auto;color:#1f2937;padding:0}
+  .privacy-page.show{display:block}
+  .prv-header{background:#f8fafc;border-bottom:1px solid #e5e7eb;padding:16px 22px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:2}
+  .prv-header h1{font-size:16px;font-weight:800;color:#111827;margin:0;font-family:'Vazirmatn'}
+  .prv-back{margin-inline-start:auto;background:#fff;border:1px solid #e5e7eb;color:#374151;padding:8px 16px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Vazirmatn'}
+  .prv-content{max-width:720px;margin:0 auto;padding:28px 22px 60px;font-family:'Vazirmatn'}
+  .prv-content h2{font-size:20px;font-weight:900;color:#111827;margin:24px 0 12px}
+  .prv-content h3{font-size:15px;font-weight:800;color:#111827;margin:20px 0 8px}
+  .prv-content p{font-size:13px;color:#4b5563;line-height:2;margin-bottom:12px}
+  .prv-content ul{font-size:13px;color:#4b5563;line-height:2;padding-inline-start:22px;margin-bottom:12px}
+  .prv-content .prv-note{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 16px;font-size:12px;color:#6b7280;margin-top:20px;line-height:1.9}
+
+  .asst-launcher{position:fixed;bottom:calc(20px + env(safe-area-inset-bottom));left:20px;z-index:300;width:64px;height:64px;border-radius:22px;border:none;cursor:pointer;background:linear-gradient(135deg,var(--primary),var(--primary-3));color:#fff;font-size:28px;display:grid;place-items:center;box-shadow:0 16px 38px rgba(224,120,86,.5);transition:.32s var(--ease)}
+  .asst-launcher:hover{transform:translateY(-4px) scale(1.05)}
+  .asst-launcher .ping{position:absolute;top:-3px;right:-3px;width:16px;height:16px;border-radius:50%;background:var(--gold);border:2.5px solid var(--bg);animation:ping 2s ease-in-out infinite}
+  @keyframes ping{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.3);opacity:.7}}
+  .asst-launcher.hide{transform:scale(0);opacity:0;pointer-events:none}
+  .asst{position:fixed;bottom:20px;left:20px;z-index:310;width:400px;max-width:calc(100vw - 32px);height:640px;max-height:calc(100dvh - 40px);background:#fff;border-radius:26px;border:1px solid rgba(239,227,213,.95);box-shadow:0 30px 80px rgba(80,50,30,.28);display:flex;flex-direction:column;overflow:hidden;transform:translateY(24px) scale(.96);opacity:0;pointer-events:none;transition:.4s var(--ease)}
+  .asst.open{transform:none;opacity:1;pointer-events:auto}
+  .asst-head{display:flex;align-items:center;gap:11px;padding:14px 16px;background:linear-gradient(135deg,var(--primary),var(--primary-3));color:#fff;flex-shrink:0;position:relative;overflow:hidden}
+  .asst-head::after{content:'';position:absolute;width:160px;height:160px;border-radius:50%;background:rgba(255,255,255,.13);top:-90px;left:-50px}
+  .asst-av{width:44px;height:44px;border-radius:14px;background:rgba(255,255,255,.22);display:grid;place-items:center;font-size:22px;flex-shrink:0;position:relative;z-index:1}
+  .asst-head b{display:block;font-size:13.5px;font-weight:800;line-height:1.5;position:relative;z-index:1}
+  .asst-status{font-size:11px;display:inline-flex;align-items:center;gap:5px;opacity:.95;position:relative;z-index:1}
+  .asst-status i{width:7px;height:7px;border-radius:50%;background:#8fe6b0;display:inline-block}
+  .asst-close{margin-inline-start:auto;background:rgba(255,255,255,.22);border:none;color:#fff;width:44px;height:44px;border-radius:12px;cursor:pointer;font-size:20px;font-weight:700;display:grid;place-items:center;transition:.2s;position:relative;z-index:2}
+  .asst-close:hover{background:rgba(255,255,255,.38)}
+  .asst-log{flex:1;overflow-y:auto;padding:18px 14px 6px;display:flex;flex-direction:column;gap:10px;background:linear-gradient(180deg,#fffaf4,#fdf8f2);-webkit-overflow-scrolling:touch}
+  .asst-log::-webkit-scrollbar{width:6px}
+  .asst-log::-webkit-scrollbar-thumb{background:#e3d2c1;border-radius:99px}
+  .msg{max-width:86%;font-size:13px;line-height:1.95;padding:11px 14px;border-radius:16px;animation:msgIn .4s var(--ease);word-wrap:break-word}
+  @keyframes msgIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  .msg.bot{align-self:flex-start;background:#fff;border:1px solid var(--line);border-bottom-right-radius:6px;color:#4a3829;box-shadow:0 4px 14px rgba(80,50,30,.06)}
+  .msg.bot b{color:var(--primary-3)}
+  .msg.me{align-self:flex-end;background:linear-gradient(135deg,var(--primary),var(--primary-3));color:#fff;border-bottom-left-radius:6px;box-shadow:0 6px 18px rgba(224,120,86,.3)}
+  .msg.typing{display:flex;gap:5px;align-items:center;padding:14px 16px}
+  .msg.typing i{width:7px;height:7px;border-radius:50%;background:var(--primary-2);animation:dotB .95s ease-in-out infinite}
+  .msg.typing i:nth-child(2){animation-delay:.15s}
+  .msg.typing i:nth-child(3){animation-delay:.3s}
+  @keyframes dotB{0%,80%,100%{transform:translateY(0);opacity:.5}40%{transform:translateY(-5px);opacity:1}}
+  .asst-opts{padding:8px 14px 4px;display:flex;flex-wrap:wrap;gap:7px;background:#fdf8f2;flex-shrink:0;max-height:38%;overflow-y:auto}
+  .asst-opts::-webkit-scrollbar{width:5px}
+  .asst-opts::-webkit-scrollbar-thumb{background:#e3d2c1;border-radius:99px}
+  .opt-chip{background:#fff;border:1.5px solid #f0c7b1;color:var(--primary-3);font-size:12px;font-weight:700;padding:9px 14px;border-radius:99px;cursor:pointer;transition:.22s var(--ease);animation:msgIn .35s both}
+  .opt-chip:hover{background:linear-gradient(135deg,#fbeadb,#f7dcc7);transform:translateY(-2px);box-shadow:0 6px 14px rgba(224,120,86,.18)}
+  .opt-chip:active{transform:translateY(0) scale(.97)}
+  .asst-input{display:flex;gap:8px;padding:12px 14px;border-top:1px solid var(--line);background:#fff;flex-shrink:0;padding-bottom:calc(12px + env(safe-area-inset-bottom))}
+  .asst-input input{flex:1;border:1.5px solid var(--line);border-radius:13px;padding:12px 14px;font-family:inherit;font-size:13px;outline:none;transition:.25s;background:#fdf8f2;color:var(--ink);min-width:0}
+  .asst-input input:focus{border-color:var(--primary);background:#fff;box-shadow:0 0 0 3px rgba(224,120,86,.14)}
+  .asst-mic{width:46px;height:46px;border-radius:13px;border:none;cursor:pointer;background:#f5ebdf;color:#5c4a3b;font-size:17px;display:grid;place-items:center;transition:.22s;flex-shrink:0}
+  .asst-mic:hover{background:#ede0d0}
+  .asst-mic.recording{background:linear-gradient(135deg,#d66262,#b84848);color:#fff;animation:micPulse 1.2s ease infinite}
+  @keyframes micPulse{0%,100%{box-shadow:0 0 0 0 rgba(214,98,98,.5)}50%{box-shadow:0 0 0 12px rgba(214,98,98,0)}}
+  .asst-input button.asst-send{width:46px;height:46px;border-radius:13px;border:none;cursor:pointer;background:linear-gradient(135deg,var(--primary),var(--primary-3));color:#fff;font-size:16px;display:grid;place-items:center;transition:.22s;flex-shrink:0}
+  .asst-input button.asst-send:hover{transform:scale(1.06)}
+
+  .modal{position:fixed;inset:0;z-index:400;display:none;place-items:center;padding:18px;background:rgba(51,38,28,.55);backdrop-filter:blur(6px)}
+  .modal.open{display:grid;animation:fadeIn .28s ease}
+  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+  .modal-box{background:#fff;border-radius:26px;width:100%;max-width:540px;max-height:92vh;overflow-y:auto;box-shadow:0 40px 90px rgba(51,38,28,.38);animation:modalIn .42s var(--ease);position:relative}
+  @keyframes modalIn{from{opacity:0;transform:translateY(26px) scale(.96)}to{opacity:1;transform:none}}
+  .modal-box::-webkit-scrollbar{width:6px}
+  .modal-box::-webkit-scrollbar-thumb{background:#e3d2c1;border-radius:99px}
+  .m-head{padding:20px 22px;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--line);position:sticky;top:0;background:#fff;border-radius:26px 26px 0 0;z-index:2}
+  .m-head h3{font-size:16px;font-weight:900;line-height:1.6;color:var(--ink)}
+  .m-head small{font-size:11.5px;color:var(--muted);display:block}
+  .m-close{margin-inline-start:auto;width:40px;height:40px;border-radius:11px;border:none;background:#f7ecdf;color:#5c4a3b;cursor:pointer;font-size:16px;display:grid;place-items:center;transition:.22s;flex-shrink:0}
+  .m-close:hover{background:#efe0cf}
+  .m-body{padding:22px}
+  .steps-dots{display:flex;gap:6px;justify-content:center;padding:0 22px 18px}
+  .steps-dots i{height:6px;border-radius:99px;background:#f0e4d5;flex:1;max-width:64px;transition:.4s var(--ease)}
+  .steps-dots i.on{background:linear-gradient(90deg,var(--primary),var(--gold))}
+  .lbl{display:block;font-size:12.5px;font-weight:800;margin-bottom:9px;color:#5c4a3b}
+  .lbl:not(:first-child){margin-top:18px}
+  .chips{display:flex;gap:8px;flex-wrap:wrap}
+  .chip{padding:11px 16px;border-radius:12px;border:1.5px solid var(--line);background:#fff;cursor:pointer;font-family:inherit;font-size:12.5px;font-weight:700;color:#5c4a3b;transition:.22s var(--ease)}
+  .chip:hover{border-color:#f0b99e;transform:translateY(-2px)}
+  .chip.active{border-color:var(--primary);background:linear-gradient(135deg,#fbeadb,#f7dcc7);color:var(--primary-3);transform:translateY(-2px);box-shadow:0 6px 16px rgba(224,120,86,.22)}
+  .chip.disabled{opacity:.42;cursor:not-allowed;text-decoration:line-through}
+  .chip.disabled:hover{transform:none;border-color:var(--line)}
+  .chip.slot-chip{min-width:88px;text-align:center}
+  .input{width:100%;padding:13px 15px;border-radius:13px;border:1.5px solid var(--line);font-family:inherit;font-size:14px;background:#fdf8f2;transition:.22s;color:var(--ink)}
+  .input:focus{outline:none;border-color:var(--primary);background:#fff;box-shadow:0 0 0 4px rgba(224,120,86,.14)}
+  textarea.input{resize:vertical;min-height:88px;line-height:1.9}
+  .ltr{direction:ltr;text-align:left;letter-spacing:.6px}
+  .field{margin-bottom:15px}
+  .err{display:none;color:#b84848;font-size:12.5px;font-weight:700;margin-bottom:12px;background:#fdeeee;border:1px solid #f3cccc;border-radius:12px;padding:10px 14px}
+  .err.show{display:block;animation:shake .4s ease}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+  .sum-box{background:linear-gradient(135deg,#fdf8f2,#faf2e8);border:1px solid var(--line);border-radius:15px;padding:14px 17px;margin-bottom:18px;font-size:13px;color:#5c4a3b}
+  .sum-box div{display:flex;justify-content:space-between;padding:5px 0;gap:12px}
+  .sum-box b{color:var(--ink);font-weight:800;flex-shrink:0}
+  .sum-box .total{border-top:1px dashed var(--line);margin-top:6px;padding-top:10px;font-size:14px;color:var(--primary-3);font-weight:900}
+  .check{width:92px;height:92px;border-radius:50%;background:linear-gradient(135deg,#dcf0e3,#c8e7d3);color:#2f8a67;display:grid;place-items:center;font-size:44px;margin:0 auto 18px;animation:pop .6s cubic-bezier(.2,1.4,.5,1);box-shadow:0 14px 34px rgba(63,155,125,.3)}
+  @keyframes pop{0%{transform:scale(.3);opacity:0}100%{transform:scale(1);opacity:1}}
+  .track{display:inline-block;font-weight:900;font-size:15px;color:var(--primary-3);background:linear-gradient(135deg,#fbeadb,#f7dcc7);padding:9px 22px;border-radius:13px;letter-spacing:1.4px;margin:6px 0 18px}
+
+  .toast{position:fixed;bottom:calc(24px + env(safe-area-inset-bottom));right:50%;transform:translate(50%,120px);background:#33261c;color:#fff;font-size:13px;font-weight:700;padding:13px 22px;border-radius:14px;z-index:500;opacity:0;transition:.4s var(--ease);pointer-events:none;box-shadow:0 18px 40px rgba(51,38,28,.35);max-width:calc(100vw - 40px)}
+  .toast.show{transform:translate(50%,0);opacity:1}
+  .confetti-canvas{position:fixed;inset:0;pointer-events:none;z-index:600}
+
+  /* ====== استایل پنل مدیریت ====== */
+  .admin-page{position:fixed;inset:0;z-index:1100;background:#f6f8fa;display:none;overflow-y:auto;color:#1f2937}
+  .admin-page.show{display:block}
+  .admin-header{background:linear-gradient(135deg,#7ba098,#5a8a7a);padding:16px 22px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:2;color:#fff}
+  .admin-header h1{font-size:16px;font-weight:800;margin:0;font-family:'Vazirmatn'}
+  .admin-header .btn{background:rgba(255,255,255,.22);color:#fff;padding:8px 16px;font-size:12px;border-radius:8px;border:none;cursor:pointer;font-family:'Vazirmatn'}
+  .admin-header .btn:hover{background:rgba(255,255,255,.35)}
+  .admin-content{max-width:1100px;margin:0 auto;padding:24px 20px 60px}
+  .admin-tabs{display:flex;gap:6px;margin-bottom:20px;flex-wrap:wrap}
+  .admin-tab{background:#fff;border:1.5px solid var(--line);color:#5c4a3b;padding:10px 18px;border-radius:11px;font-family:'Vazirmatn';font-size:13px;font-weight:700;cursor:pointer;transition:.22s}
+  .admin-tab.active{background:linear-gradient(135deg,var(--primary),var(--primary-3));color:#fff;border-color:transparent}
+  .admin-tab:hover:not(.active){border-color:#f0b99e;background:#fffaf5}
+  .stat-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:22px}
+  .stat-card{background:#fff;border:1.5px solid var(--line);border-radius:16px;padding:20px 18px}
+  .stat-card h4{font-size:12.5px;color:var(--muted);font-weight:700;margin-bottom:8px}
+  .stat-card .big{font-size:22px;font-weight:900;color:var(--ink);line-height:1.4}
+  .stat-card .sub{font-size:11.5px;color:var(--muted);margin-top:6px}
+  .stat-card.hl{background:linear-gradient(135deg,#fffaf5,#fdf4ea);border-color:#f0c7b1}
+  .stat-card.hl .big{color:var(--primary-3)}
+  .admin-table{width:100%;background:#fff;border-radius:14px;overflow:hidden;border:1.5px solid var(--line);border-collapse:collapse;font-size:12px}
+  .admin-table th{background:#fbeadb;padding:11px 10px;text-align:right;font-weight:800;color:#5c4a3b;border-bottom:2px solid #f0c7b1;font-size:11.5px;white-space:nowrap}
+  .admin-table td{padding:10px;border-bottom:1px solid #f5e9db;color:#4a3829;font-size:12px}
+  .admin-table tr:last-child td{border-bottom:none}
+  .admin-table tr:hover td{background:#fffaf5}
+  .admin-table .status{display:inline-block;padding:2px 9px;border-radius:99px;font-size:10.5px;font-weight:800}
+  .admin-table .status.confirmed{background:#e0f2ea;color:#2f8a67}
+  .admin-table .status.cancelled{background:#fdeeee;color:#b84848}
+  .admin-table .status.paid{background:#dcf0e3;color:#2f8a67}
+  .admin-table .status.unpaid{background:#fdf3dd;color:#a86a1f}
+  .admin-table .action-btn{padding:5px 10px;font-size:10.5px;border-radius:8px;border:1px solid var(--line);background:#fff;cursor:pointer;font-family:'Vazirmatn';font-weight:700;margin-inline-end:4px;transition:.2s}
+  .admin-table .action-btn:hover{background:#fbeadb;border-color:#f0b99e}
+  .admin-table .action-btn.danger{background:#fdeeee;color:#b84848;border-color:#f3cccc}
+  .admin-table .action-btn.danger:hover{background:#fadada}
+  .admin-form{background:#fff;border:1.5px solid var(--line);border-radius:16px;padding:22px}
+  .admin-form .row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+  .admin-form .row.full{grid-template-columns:1fr}
+  .admin-form label{display:block;font-size:12px;font-weight:800;color:#5c4a3b;margin-bottom:6px}
+  .admin-form input,.admin-form select,.admin-form textarea{width:100%;padding:10px 13px;border:1.5px solid var(--line);border-radius:10px;font-family:'Vazirmatn';font-size:13px;background:#fdf8f2;outline:none;transition:.2s}
+  .admin-form input:focus,.admin-form select:focus,.admin-form textarea:focus{border-color:var(--primary);background:#fff}
+  .admin-form textarea{resize:vertical;min-height:70px;line-height:1.9}
+  .admin-empty{text-align:center;padding:40px;color:var(--muted);font-size:13px}
+  .admin-login{max-width:380px;margin:80px auto;background:#fff;border-radius:20px;border:1.5px solid var(--line);padding:32px 28px;text-align:center}
+  .admin-login h2{font-size:19px;font-weight:900;margin-bottom:8px;color:var(--ink)}
+  .admin-login p{font-size:12.5px;color:var(--muted);margin-bottom:20px}
+  .admin-login input{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:11px;font-family:'Vazirmatn';font-size:13px;background:#fdf8f2;outline:none;margin-bottom:12px;text-align:center}
+  .admin-login input:focus{border-color:var(--primary);background:#fff}
+  .admin-login .err{text-align:center}
+  .list-item{background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:10px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .list-item .info{flex:1;min-width:200px}
+  .list-item .info b{font-size:13px;color:var(--ink);display:block;margin-bottom:3px}
+  .list-item .info small{font-size:11.5px;color:var(--muted)}
+  .list-item .price-edit{display:flex;gap:6px;align-items:center}
+  .list-item .price-edit input{width:130px;padding:8px 10px;border:1.5px solid var(--line);border-radius:8px;font-family:'Vazirmatn';font-size:12px;text-align:center}
+  .list-item .price-edit button{padding:8px 14px;font-size:11.5px;border-radius:8px;border:none;background:linear-gradient(135deg,var(--primary),var(--primary-3));color:#fff;cursor:pointer;font-family:'Vazirmatn';font-weight:700}
+
+  @media(max-width:960px){
+    .hero-grid{grid-template-columns:1fr}
+    .hero-copy h1{font-size:31px}
+    .nav-links{display:none}
+    .nav-cta{display:none}
+    .nav-burger{display:grid;place-items:center;margin-inline-start:auto}
+  }
+  @media(max-width:560px){
+    .sec{padding:56px 16px}
+    .hero{padding:38px 16px 20px}
+    .hero-copy h1{font-size:26px}
+    .sec-head h2{font-size:22px}
+    .stats{gap:18px}
+    .modal-box{border-radius:22px}
+    .m-body{padding:18px}
+    .asst{top:0;bottom:0;left:0;right:0;width:100%;height:100dvh;max-height:100dvh;max-width:none;border-radius:0;border:none;padding-top:env(safe-area-inset-top)}
+    .asst-head{padding:14px 16px;box-shadow:0 6px 20px rgba(180,120,80,.18)}
+    .asst-close{width:46px;height:46px;font-size:22px;background:rgba(255,255,255,.28);box-shadow:0 3px 10px rgba(0,0,0,.12)}
+    .asst-launcher{left:14px;bottom:calc(14px + env(safe-area-inset-bottom));width:58px;height:58px;border-radius:20px;font-size:25px}
+    .calm-launcher{left:80px;bottom:calc(14px + env(safe-area-inset-bottom));width:54px;height:54px;border-radius:18px;font-size:23px}
+    .mood-grid{grid-template-columns:repeat(2,1fr);gap:10px}
+    .mood-btn{padding:16px 10px}
+    .mood-btn .emo{font-size:32px}
+    .mood-inner h2{font-size:22px}
+    .mood-inner p{font-size:13px}
+    .letter-form{grid-template-columns:1fr}
+    .amb-grid{grid-template-columns:1fr 1fr}
+    .story{flex:0 0 280px}
+    .nav-util{margin-inline-start:auto}
+    .nav-icon{width:38px;height:38px;font-size:16px}
+    .admin-form .row{grid-template-columns:1fr}
+    .admin-table{font-size:11px}
+    .admin-table th,.admin-table td{padding:8px 6px}
+  }
+  @media (prefers-reduced-motion: reduce){
+    *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-orbs" aria-hidden="true">
+  <span class="orb o1"></span><span class="orb o2"></span><span class="orb o3"></span><span class="orb o4"></span>
+</div>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="#home">
+      <div class="brand-logo">🌱</div>
+      <div class="brand-text">
+        <b>مرکز مشاوره نگاهی نو</b>
+        <span>همراه شما برای یک دید تازه</span>
+      </div>
+    </a>
+    <nav class="nav-links">
+      <a href="#home">خانه</a>
+      <a href="#therapists">درمانگرها</a>
+      <a href="#workshops">کارگاه‌ها</a>
+      <a href="#stories">قصه‌ها</a>
+      <a href="#wall">همراهان</a>
+      <a href="#faq">سؤالات</a>
+      <a href="#contact">تماس</a>
+    </nav>
+    <div class="nav-util">
+      <button class="nav-icon" id="soundToggle" onclick="toggleAmbient()" title="صدای آرامش">🔊</button>
+      <button class="nav-icon" onclick="showMoodPicker()" title="حال امروز">🌤️</button>
+      <button class="nav-icon" onclick="enterPrivacy()" title="حریم خصوصی">👁️</button>
+      <button class="nav-icon" onclick="openAdmin()" title="پنل مدیریت">⚙️</button>
+    </div>
+    <button class="btn btn-primary nav-cta" onclick="openBooking()">رزرو نوبت</button>
+    <button class="nav-burger" onclick="toggleMenu()" aria-label="منو">☰</button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#home" onclick="toggleMenu()">خانه</a>
+    <a href="#therapists" onclick="toggleMenu()">درمانگرها</a>
+    <a href="#workshops" onclick="toggleMenu()">کارگاه‌ها</a>
+    <a href="#stories" onclick="toggleMenu()">قصه‌ها</a>
+    <a href="#wall" onclick="toggleMenu()">همراهان</a>
+    <a href="#journal" onclick="toggleMenu()">ژورنال</a>
+    <a href="#faq" onclick="toggleMenu()">سؤالات متداول</a>
+    <a href="#contact" onclick="toggleMenu()">تماس</a>
+    <a href="javascript:void(0)" onclick="toggleMenu();openBooking()" style="color:#c9624a;font-weight:800">رزرو نوبت</a>
+    <a href="javascript:void(0)" onclick="toggleMenu();openAdmin()" style="color:#7ba098">پنل مدیریت ⚙️</a>
+  </div>
+</header>
+
+<section class="hero" id="home">
+  <div class="hero-grid">
+    <div class="hero-copy reveal">
+      <span class="pill" id="heroPill">✨ دستیار هوشمند آماده راهنمایی شماست</span>
+      <h1>خانه‌ای برای <em>آرامش</em> و یک <em>دید تازه</em></h1>
+      <p id="heroTagline">
+        اینجا قرار نیست چیزی رو ثابت کنی یا کسی رو راضی نگه داری. فقط بیا، با هم قدم اول رو برمی‌داریم.
+      </p>
+      <div class="btn-row">
+        <button class="btn btn-primary" onclick="openTour()">🌱 شروع آرام قدم اول</button>
+        <button class="btn btn-ghost" onclick="openAssistant()">💬 گفتگو با دستیار</button>
+      </div>
+      <div class="stats">
+        <div class="stat"><b>۷</b><span>درمانگر متخصص</span></div>
+        <div class="stat"><b>۶</b><span>کارگاه تخصصی فعال</span></div>
+        <div class="stat"><b>۹۸٪</b><span>رضایت مراجعین</span></div>
+        <div class="stat"><b>&lt; ۲ دقیقه</b><span>زمان رزرو نوبت</span></div>
+      </div>
+    </div>
+
+    <div class="quick-card reveal d2">
+      <h3>🚀 شروع سریع</h3>
+      <p>یکی از مسیرها را انتخاب کنید</p>
+
+      <button class="quick-row" onclick="openAssistant()">
+        <span class="qi">🤖</span>
+        <span><b>دستیار هوشمند</b><small>انتخاب درمانگر مناسب با چند سؤال</small></span>
+        <span class="ar">›</span>
+      </button>
+
+      <button class="quick-row" onclick="openCalm('breath')">
+        <span class="qi">🌬️</span>
+        <span><b>جعبه‌ی آرامش</b><small>یک لحظه نفس بکش، تمرین و صدا</small></span>
+        <span class="ar">›</span>
+      </button>
+
+      <button class="quick-row" onclick="openBooking()">
+        <span class="qi">📅</span>
+        <span><b>رزرو نوبت مشاوره</b><small>حضوری یا آنلاین، در کمتر از ۲ دقیقه</small></span>
+        <span class="ar">›</span>
+      </button>
+
+      <button class="quick-row" onclick="document.getElementById('workshops').scrollIntoView({behavior:'smooth'})">
+        <span class="qi">🎓</span>
+        <span><b>کارگاه‌های تخصصی</b><small>ثبت‌نام در دوره‌های در حال برگزاری</small></span>
+        <span class="ar">›</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="therapists">
+  <div class="sec-head reveal">
+    <span class="pill">👩‍⚕️ تیم درمان</span>
+    <h2>درمانگران متخصص ما</h2>
+    <p>قبل از رزرو، ۳۰ ثانیه صدای درمانگر را بشنوید — این آشنایی اول، اولین قدم اعتماد است.</p>
+  </div>
+  <div class="grid" id="therapistsGrid"></div>
+</section>
+
+<section class="sec" id="workshops">
+  <div class="sec-head reveal">
+    <span class="pill">🎓 آموزش تخصصی</span>
+    <h2>کارگاه‌های در حال ثبت‌نام</h2>
+    <p>ظرفیت هر کارگاه محدود است؛ برای ثبت‌نام عجله کنید.</p>
+  </div>
+  <div class="grid" id="workshopsGrid"></div>
+</section>
+
+<section class="sec" id="stories">
+  <div class="sec-head reveal">
+    <span class="pill">📖 قصه‌های نگاهی نو</span>
+    <h2>مسیرهایی که طی شد</h2>
+    <p>قصه‌های واقعی (با تغییر جزئیات و با اجازه‌ی صاحبانشان) از قدم‌هایی که برداشته شده.</p>
+  </div>
+  <div class="stories-wrap reveal">
+    <div class="stories-scroll" id="storiesScroll"></div>
+  </div>
+  <div class="scroll-hint">← برای دیدن بقیه، کارت‌ها را بکشید</div>
+</section>
+
+<section class="sec" id="wall">
+  <div class="sec-head reveal">
+    <span class="pill">💌 دیوار همراهان</span>
+    <h2>جملاتی که برای شما گذاشته شد</h2>
+    <p>بعضی از مراجعین با اجازه‌ی خودشان این‌ها را نوشتند. اگر تو هم دوست داری، می‌تونی یه جمله برای بعدی‌ها بذاری.</p>
+  </div>
+  <div class="wall-grid" id="wallGrid"></div>
+  <div class="wall-form reveal">
+    <input id="wallInput" placeholder="دوست داری برای نفر بعدی چی بنویسی؟" maxlength="120" />
+    <button class="btn btn-primary" onclick="addWallNote()">ثبت پیام 💌</button>
+  </div>
+</section>
+
+<section class="sec" id="letter">
+  <div class="letter-card reveal">
+    <h3>✉️ نامه‌ای به خودِ آینده</h3>
+    <p>یه جمله برای خودت بنویس. ۳ ماه دیگه، ما همون نامه رو برات ایمیل می‌کنیم. یه یادآوری کوچیک از کسی که امروز بودی.</p>
+    <div class="letter-form">
+      <input id="letterName" placeholder="اسمت (اختیاری)" maxlength="40" />
+      <input id="letterEmail" class="ltr" placeholder="ایمیلت" type="email" />
+      <textarea id="letterText" placeholder="سلام خودم... امروز می‌خوام بهت بگم که..." maxlength="600"></textarea>
+      <button class="btn btn-primary" onclick="sendLetter()">📮 ثبت نامه به آینده</button>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="journal">
+  <div class="sec-head reveal">
+    <span class="pill">📝 ردپای آرامش</span>
+    <h2>ژورنال یک‌خطی</h2>
+    <p>هر روز در یک جمله بگو حالت چطور بود. بعد از چند روز، الگوها رو با هم می‌بینیم.</p>
+  </div>
+  <div class="journal-card reveal">
+    <div class="journal-head">
+      <div>
+        <b>امروز چطور بود؟</b>
+        <small>یک جمله کوتاه کافیه</small>
+      </div>
+      <span class="journal-mood-badge" id="journalMoodBadge">حال امروز: —</span>
+    </div>
+    <div class="journal-input-row">
+      <input id="journalInput" placeholder="مثلاً: امروز سنگین بود، ولی یه قدم کوچیک برداشتم..." maxlength="140" />
+      <button class="btn btn-primary" onclick="addJournalEntry()">ثبت</button>
+    </div>
+    <div id="journalChart"></div>
+  </div>
+</section>
+
+<section class="sec" id="faq">
+  <div class="sec-head reveal">
+    <span class="pill">❓ راهنما</span>
+    <h2>سؤالات متداول</h2>
+    <p>پاسخ پرتکرارترین سؤالات مراجعین را اینجا ببینید.</p>
+  </div>
+  <div class="faq" id="faqBox"></div>
+</section>
+
+<section class="sec" id="contact">
+  <div class="sec-head reveal">
+    <span class="pill">📍 ارتباط با ما</span>
+    <h2>در تماس باشیم</h2>
+  </div>
+  <div class="contact-grid">
+    <div class="c-card reveal d1"><div class="ci">📞</div><b>تلفن</b><span>۰۲۱-۱۲۳۴۵۶۷۸</span></div>
+    <div class="c-card reveal d2"><div class="ci">📍</div><b>آدرس</b><span>تهران، خیابان ولیعصر، پلاک ۱۲۳، طبقه ۳</span></div>
+    <div class="c-card reveal d3"><div class="ci">🕐</div><b>ساعات کاری</b><span>شنبه تا پنجشنبه، ۹ صبح تا ۸ شب</span></div>
+    <div class="c-card reveal d4"><div class="ci">💬</div><b>دستیار هوشمند</b><span style="color:#c9624a;font-weight:700;cursor:pointer" onclick="openAssistant()">۲۴ ساعته پاسخگوست ›</span></div>
+  </div>
+</section>
+
+<footer>
+  مرکز مشاوره نگاهی نو · تمامی حقوق محفوظ است © ۱۴۰۵
+</footer>
+
+<button class="asst-launcher" id="asstLauncher" onclick="openAssistant()" aria-label="دستیار هوشمند">
+  🤖<i class="ping"></i>
+</button>
+<button class="calm-launcher" id="calmLauncher" onclick="openCalm('breath')" aria-label="جعبه آرامش">🌬️</button>
+
+<div class="asst" id="asst">
+  <div class="asst-head">
+    <div class="asst-av">🤖</div>
+    <div>
+      <b>دستیار هوشمند نگاهی نو</b>
+      <span class="asst-status"><i></i> آنلاین · پاسخگویی فوری</span>
+    </div>
+    <button class="asst-close" onclick="closeAssistant()" aria-label="بستن">✕</button>
+  </div>
+  <div class="asst-log" id="asstLog"></div>
+  <div class="asst-opts" id="asstOpts"></div>
+  <form class="asst-input" onsubmit="event.preventDefault();sendUserText();">
+    <input id="asstText" placeholder="پیام خود را بنویسید یا با 🎤 حرف بزنید..." autocomplete="off" />
+    <button type="button" class="asst-mic" id="asstMic" onclick="toggleVoiceInput()" aria-label="ورودی صوتی">🎤</button>
+    <button type="submit" class="asst-send" aria-label="ارسال">➤</button>
+  </form>
+</div>
+
+<div class="calm-panel" id="calmPanel">
+  <div class="calm-box">
+    <div class="calm-head">
+      <div class="asst-av" style="background:rgba(255,255,255,.22)">🌬️</div>
+      <div>
+        <b>جعبه‌ی آرامش</b>
+        <small>یه لحظه فقط برای خودت</small>
+      </div>
+      <button class="calm-close" onclick="closeCalm()" aria-label="بستن">✕</button>
+    </div>
+    <div class="calm-tabs">
+      <button class="calm-tab active" onclick="calmTab('breath',this)">🌬️ تنفس ۴-۷-۸</button>
+      <button class="calm-tab" onclick="calmTab('ground',this)">🖐️ زمین‌گیری</button>
+      <button class="calm-tab" onclick="calmTab('amb',this)">🎧 صدای طبیعت</button>
+      <button class="calm-tab" onclick="calmTab('quote',this)">💬 جمله امروز</button>
+    </div>
+    <div class="calm-body" id="calmBody"></div>
+  </div>
+</div>
+
+<div class="tour-screen" id="tourScreen">
+  <div class="tour-card">
+    <div class="tour-illus" id="tourIllus">🌿</div>
+    <h3 id="tourTitle">قبل از اینکه شروع کنیم...</h3>
+    <p id="tourText">می‌خوام یه لحظه با هم آشنا بشیم. چند قدم کوتاه، بعدش هر کاری خواستی می‌کنیم.</p>
+    <div class="tour-dots" id="tourDots"><i class="on"></i><i></i><i></i><i></i></div>
+    <div class="tour-actions" id="tourActions">
+      <button class="btn btn-primary" onclick="tourNext()">قدم بعدی ›</button>
+    </div>
+  </div>
+</div>
+
+<div class="privacy-page" id="privacyPage">
+  <div class="prv-header">
+    <div style="font-size:20px">🛡️</div>
+    <h1>پناهگاه دیجیتال</h1>
+    <button class="prv-back" onclick="exitPrivacy()">بازگشت به سایت</button>
+  </div>
+  <div class="prv-content">
+    <h2>حریم خصوصی شما برای ما مقدس است</h2>
+    <p>اگر ناگهان کسی نزدیک شد یا حس کردی نمی‌خوای کسی بدونه اینجایی، این صفحه مثل یک پناهگاه عمل می‌کند. هیچ‌کس نمی‌فهمد که تو در یک سایت مشاوره بودی.</p>
+    <h3>چرا این صفحه وجود دارد؟</h3>
+    <p>ما می‌دانیم که جستجوی کمک روانی، مخصوصاً در محیط‌های مشترک، می‌تواند سخت باشد. این صفحه به تو اجازه می‌دهد با یک کلیک، فضای امنی برای خودت بسازی.</p>
+    <h3>چطور از آن استفاده کنم؟</h3>
+    <ul>
+      <li>با کلیک روی «بازگشت به سایت» به همان‌جایی که بودی برمی‌گردی.</li>
+      <li>برای امنیت بیشتر، بعد از استفاده از سایت، تاریخچه‌ی مرورگرت را پاک کن.</li>
+    </ul>
+    <h3>اگر در موقعیت بحرانی هستی</h3>
+    <p>اگر احساس می‌کنی در خطر فوری هستی، لطفاً همین الان با خط ۱۲۳ (اورژانس اجتماعی) یا ۱۴۸۰ (صدای مشاور) تماس بگیر. تو تنها نیستی.</p>
+    <div class="prv-note">💚 این صفحه فقط یک ابزار است. اگر هر زمان احساس کردی به کمک واقعی نیاز داری، ما اینجاییم. کافی است برگردی و قدم اول را برداری.</div>
+  </div>
+</div>
+
+<div class="mood-screen" id="moodScreen">
+  <div class="mood-inner">
+    <h2>سلام 🌿 قبل از هر چیز...</h2>
+    <p>امروز حالت چطوره؟ این به ما کمک می‌کنه فضای سایت رو با احساست هماهنگ کنیم.</p>
+    <div class="mood-grid" id="moodGrid"></div>
+    <button class="mood-skip" onclick="skipMood()">فعلاً نمی‌خوام بگم</button>
+  </div>
+</div>
+
+<!-- مودال رزرو مشاوره -->
+<div class="modal" id="mBooking">
+  <div class="modal-box">
+    <div class="m-head">
+      <div class="asst-av" style="background:#fbeadb;color:#c9624a;font-size:20px">📅</div>
+      <div><h3>رزرو نوبت مشاوره</h3><small id="bHeadSub">انتخاب درمانگر و زمان جلسه</small></div>
+      <button class="m-close" onclick="closeModal('mBooking')" aria-label="بستن">✕</button>
+    </div>
+    <div class="steps-dots" id="bDots"><i class="on"></i><i></i><i></i></div>
+    <div class="m-body">
+      <div class="step" data-step="1">
+        <label class="lbl">نوع جلسه</label>
+        <div class="chips" id="bModes"></div>
+        <label class="lbl">درمانگر</label>
+        <div class="chips" id="bTherapists"></div>
+        <div class="err" id="err1"></div>
+        <button class="btn btn-primary btn-block" style="margin-top:20px" onclick="bookNext(1)">ادامه</button>
+      </div>
+      <div class="step" data-step="2" style="display:none">
+        <label class="lbl" style="margin-top:0">روز جلسه <small style="font-weight:600;color:#8a7565">(۱۰ روز آینده)</small></label>
+        <div class="chips" id="bDates" style="overflow-x:auto;flex-wrap:nowrap;padding-bottom:6px"></div>
+        <label class="lbl">ساعت جلسه</label>
+        <div class="chips" id="bTimes"></div>
+        <div class="err" id="err2"></div>
+        <button class="btn btn-primary btn-block" style="margin-top:20px" onclick="bookNext(2)">ادامه</button>
+        <button class="btn btn-ghost btn-block" style="margin-top:10px" onclick="setStep(1)">بازگشت</button>
+      </div>
+      <div class="step" data-step="3" style="display:none">
+        <div class="sum-box" id="bSummary"></div>
+        <div class="field"><label class="lbl" style="margin-top:0">نام و نام خانوادگی</label><input class="input" id="bName" placeholder="مثلاً سارا احمدی" /></div>
+        <div class="field"><label class="lbl" style="margin-top:0">شماره موبایل</label><input class="input ltr" id="bPhone" placeholder="09xxxxxxxxx" maxlength="11" inputmode="numeric" /></div>
+        <div class="field"><label class="lbl" style="margin-top:0">توضیح کوتاه (اختیاری)</label><textarea class="input" id="bNote" maxlength="200" placeholder="در چند جمله وضعیت را توضیح دهید..."></textarea></div>
+        <div class="err" id="err3"></div>
+        <button class="btn btn-primary btn-block" onclick="confirmBooking()">تأیید و ثبت نوبت ✅</button>
+        <button class="btn btn-ghost btn-block" style="margin-top:10px" onclick="setStep(2)">بازگشت</button>
+      </div>
+      <div class="step" data-step="4" style="display:none;text-align:center">
+        <div class="check">✓</div>
+        <h2 style="font-size:19px;font-weight:900;margin-bottom:6px">نوبت شما ثبت شد!</h2>
+        <p style="font-size:13px;color:#8a7565;margin-bottom:10px">پیامک تأیید برای شما و درمانگر ارسال شد.</p>
+        <div class="track" id="bTrack"></div>
+        <div class="sum-box" id="bSuccess" style="text-align:right"></div>
+        <button class="btn btn-primary btn-block" onclick="closeModal('mBooking')">بستن</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- مودال ثبت‌نام کارگاه -->
+<div class="modal" id="mWorkshop">
+  <div class="modal-box">
+    <div class="m-head">
+      <div class="asst-av" style="background:#fbeadb;color:#c9624a;font-size:20px">🎓</div>
+      <div><h3 id="wHeadTitle">ثبت‌نام در کارگاه</h3><small id="wHeadSub">تکمیل اطلاعات ثبت‌نام</small></div>
+      <button class="m-close" onclick="closeModal('mWorkshop')" aria-label="بستن">✕</button>
+    </div>
+    <div class="m-body">
+      <div id="wInfo"></div>
+      <label class="lbl">نحوه پرداخت</label>
+      <div class="chips" id="wPayTypes">
+        <button class="chip" data-pay="deposit" onclick="selectWPayType('deposit',this)">۲۰٪ پیش‌پرداخت</button>
+        <button class="chip" data-pay="full" onclick="selectWPayType('full',this)">پرداخت کامل</button>
+      </div>
+      <div id="wPayInfo" style="font-size:12px;color:#8a7565;margin-top:10px;line-height:1.9"></div>
+      <div class="field" style="margin-top:16px"><label class="lbl" style="margin-top:0">نام و نام خانوادگی</label><input class="input" id="wName" placeholder="مثلاً علی رضایی" /></div>
+      <div class="field"><label class="lbl" style="margin-top:0">شماره موبایل</label><input class="input ltr" id="wPhone" placeholder="09xxxxxxxxx" maxlength="11" inputmode="numeric" /></div>
+      <div class="err" id="wErr"></div>
+      <button class="btn btn-primary btn-block" onclick="confirmWorkshop()">ادامه و پرداخت 💳</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="mWorkshopOk">
+  <div class="modal-box">
+    <div class="m-body" style="text-align:center;padding:32px 22px">
+      <div class="check">✓</div>
+      <h2 style="font-size:19px;font-weight:900;margin-bottom:6px">ثبت‌نام انجام شد!</h2>
+      <p style="font-size:13px;color:#8a7565;margin-bottom:8px">پیامک تأیید برای شما و مدرس ارسال شد.</p>
+      <div class="track" id="wTrack"></div>
+      <div class="sum-box" id="wSuccess" style="text-align:right"></div>
+      <button class="btn btn-primary btn-block" onclick="closeModal('mWorkshopOk');closeModal('mWorkshop')">بستن</button>
+    </div>
+  </div>
+</div>
+
+<!-- مودال ویرایش کارگاه (ادمین) -->
+<div class="modal" id="mEditWorkshop">
+  <div class="modal-box">
+    <div class="m-head">
+      <div class="asst-av" style="background:#fbeadb;color:#c9624a;font-size:20px">✏️</div>
+      <div><h3 id="ewTitle">ویرایش کارگاه</h3><small>اطلاعات کارگاه را ویرایش کنید</small></div>
+      <button class="m-close" onclick="closeModal('mEditWorkshop')" aria-label="بستن">✕</button>
+    </div>
+    <div class="m-body">
+      <div class="admin-form">
+        <div class="row">
+          <div><label>عنوان کارگاه</label><input id="ewTitleIn" /></div>
+          <div><label>ایموجی</label><input id="ewEmoji" maxlength="4" style="text-align:center" /></div>
+        </div>
+        <div class="row">
+          <div><label>مدرس</label><select id="ewInstructor"></select></div>
+          <div><label>تعداد جلسات</label><input id="ewSessions" placeholder="مثلاً ۴ جلسه" /></div>
+        </div>
+        <div class="row">
+          <div><label>تاریخ (میلادی)</label><input type="date" id="ewDate" class="ltr" /></div>
+          <div><label>ساعت شروع (مثلاً 16:00)</label><input type="time" id="ewStart" class="ltr" /></div>
+        </div>
+        <div class="row">
+          <div><label>مدت (دقیقه)</label><input type="number" id="ewDuration" min="30" step="15" value="90" /></div>
+          <div><label>ظرفیت</label><input type="number" id="ewCap" min="1" value="20" /></div>
+        </div>
+        <div class="row">
+          <div><label>قیمت کل (تومان)</label><input type="number" id="ewPrice" min="0" step="10000" /></div>
+          <div><label>تعداد ثبت‌نام‌شده</label><input type="number" id="ewFilled" min="0" value="0" /></div>
+        </div>
+        <div class="row full"><div><label>توضیحات</label><textarea id="ewDesc"></textarea></div></div>
+        <div class="err" id="ewErr"></div>
+        <div style="display:flex;gap:8px;margin-top:16px">
+          <button class="btn btn-primary" style="flex:1" onclick="saveWorkshop()">ذخیره</button>
+          <button class="btn btn-ghost" style="flex:1" onclick="closeModal('mEditWorkshop')">انصراف</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- پنل ادمین -->
+<div class="admin-page" id="adminPage">
+  <div class="admin-header">
+    <div style="font-size:20px">⚙️</div>
+    <h1>پنل مدیریت - نگاهی نو</h1>
+    <button class="btn" style="margin-inline-start:auto" onclick="exitAdmin()">خروج از پنل</button>
+  </div>
+  <div class="admin-content" id="adminContent"></div>
+</div>
+
+<div class="toast" id="toast"></div>
+<canvas class="confetti-canvas" id="confettiCanvas"></canvas>
+
+<script>
+/* =========================================================
+   ⚙️  تنظیمات اصلی — قبل از انتشار این مقادیر را پر کنید
+   ========================================================= */
+const ADMIN_CREDENTIALS = {
+  username: 'admin',
+  password: 'nagahino1404'   // ← حتماً عوضش کنید
+};
+
+const SMS_CONFIG = {
+  enabled: false,           // ← بعد از تنظیم، true کنید
+  proxyUrl: '',             // ← URL بک‌اند خودتان که {to, message} می‌گیرد
+  // نمونه endpoint بک‌اند (PHP) در انتهای فایل توضیح داده شده
+};
+
+const CENTER_NAME = 'مرکز مشاوره نگاهی نو';
+
+/* =========================================================
+   ابزارهای عمومی
+   ========================================================= */
+const $ = id => document.getElementById(id);
+const toFa = n => String(n).replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[d]);
+const money = n => toFa(Number(n).toLocaleString('en-US')) + ' تومان';
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+const pick = arr => arr[Math.floor(Math.random() * arr.length)];
+
+const ls = {
+  get(k,d){ try{ const v = localStorage.getItem('nk_'+k); return v ? JSON.parse(v) : d; }catch(e){ return d; } },
+  set(k,v){ try{ localStorage.setItem('nk_'+k, JSON.stringify(v)); }catch(e){} }
+};
+
+function toast(msg){
+  const t = $('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(t._tid);
+  t._tid = setTimeout(() => t.classList.remove('show'), 3200);
+}
+function toggleMenu(){ $('mobileMenu').classList.toggle('open'); }
+function openModal(id){ $(id).classList.add('open'); document.body.style.overflow = 'hidden'; }
+function closeModal(id){
+  $(id).classList.remove('open');
+  if (!document.querySelector('.modal.open')) document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape'){
+    document.querySelectorAll('.modal.open').forEach(m => closeModal(m.id));
+    closeAssistant(); closeCalm(); hideMoodPicker();
+  }
+});
+document.querySelectorAll('.modal').forEach(m => {
+  m.addEventListener('click', e => { if (e.target === m) closeModal(m.id); });
+});
+
+/* =========================================================
+   تاریخ‌ها و ساعت
+   ========================================================= */
+function toISO(d){
+  const y = d.getFullYear();
+  const m = String(d.getMonth()+1).padStart(2,'0');
+  const day = String(d.getDate()).padStart(2,'0');
+  return `${y}-${m}-${day}`;
+}
+function parseISO(iso){ return new Date(iso + 'T12:00:00'); }
+function faDateShort(iso){
+  const d = typeof iso === 'string' ? parseISO(iso) : iso;
+  try{ return new Intl.DateTimeFormat('fa-IR',{day:'numeric',month:'long'}).format(d); }
+  catch(e){ return ''; }
+}
+function faDateLong(iso){
+  const d = typeof iso === 'string' ? parseISO(iso) : iso;
+  try{ return new Intl.DateTimeFormat('fa-IR',{weekday:'long',day:'numeric',month:'long'}).format(d); }
+  catch(e){ return ''; }
+}
+function faDateFull(iso){
+  const d = typeof iso === 'string' ? parseISO(iso) : iso;
+  try{ return new Intl.DateTimeFormat('fa-IR',{weekday:'long',year:'numeric',month:'long',day:'numeric'}).format(d); }
+  catch(e){ return ''; }
+}
+function toFaTime(t){ return t.replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[d]); }
+function addMinutes(time, mins){
+  const [h, m] = time.split(':').map(Number);
+  const total = h * 60 + m + mins;
+  return String(Math.floor(total/60)).padStart(2,'0') + ':' + String(total%60).padStart(2,'0');
+}
+function timeToMin(t){ const [h,m] = t.split(':').map(Number); return h*60+m; }
+
+// ۱۰ روز آینده از فردا
+function getAvailableDates(){
+  const dates = [];
+  const today = new Date(); today.setHours(0,0,0,0);
+  for (let i = 1; i <= 10; i++){
+    const d = new Date(today); d.setDate(today.getDate() + i);
+    dates.push({ iso: toISO(d), date: d, display: faDateLong(toISO(d)) });
+  }
+  return dates;
+}
+
+/* =========================================================
+   داده‌های پایه — درمانگرها
+   ========================================================= */
+const therapists = [
+  {id:'zeinab', name:'زینب صادقیان', title:'متخصص بازی‌درمانی کودکان', photo:'https://randomuser.me/api/portraits/women/65.jpg', price:450000, phone:'09120000001', rate:'۴.۹', mode:'حضوری و آنلاین', tags:['بازی‌درمانی','کودکان زیر ۳ سال','نافرمانی'], bio:'متخصص بازی‌درمانی کودکان با تمرکز بر سنین پایین، آموزش دستشویی، نافرمانی و لجبازی.', voice:'سلام، من زینب صادقیان هستم. خوشحالم که به فکر خودت یا کوچولوت هستی.'},
+  {id:'arzoo', name:'ارزو سمسار', title:'بازی‌درمانگر و متخصص تربیت جنسی کودک', photo:'https://randomuser.me/api/portraits/women/44.jpg', price:450000, phone:'09120000002', rate:'۴.۸', mode:'حضوری و آنلاین', tags:['بازی‌درمانی','تربیت جنسی','کودک'], bio:'متخصص بازی‌درمانی و تربیت جنسی کودک؛ کار با مشکلات رفتاری و هیجانی کودکان.', voice:'سلام، من ارزو سمسار هستم. اینجا می‌تونی راحت باشی.'},
+  {id:'reyhaneh', name:'ریحانه رحیمیان', title:'متخصص استعدادسنجی و اختلال یادگیری', photo:'https://randomuser.me/api/portraits/women/79.jpg', price:500000, phone:'09120000003', rate:'۴.۹', mode:'حضوری و آنلاین', tags:['استعدادسنجی','اختلال یادگیری','تحصیلی'], bio:'متخصص استعدادسنجی و اختلالات یادگیری کودکان و نوجوانان.', voice:'سلام، من ریحانه رحیمیان هستم. هر آدمی استعداد خاص خودش رو داره.'},
+  {id:'mahla', name:'مهلا استقامت', title:'روان‌شناس کودک', photo:'https://randomuser.me/api/portraits/women/68.jpg', price:450000, phone:'09120000004', rate:'۴.۷', mode:'حضوری و آنلاین', tags:['کودک','مشکلات رفتاری','هیجانی'], bio:'روان‌شناس کودک؛ کار با طیف گسترده‌ای از مشکلات رفتاری، هیجانی و رشدی کودکان.', voice:'سلام، من مهلا استقامت هستم. بچه‌ها وقتی حرف نمی‌زنن، با رفتارشون حرف می‌زنن.'},
+  {id:'leila', name:'لیلا همتی', title:'روان‌شناس نوجوان و بزرگسال', photo:'https://randomuser.me/api/portraits/women/32.jpg', price:500000, phone:'09120000005', rate:'۴.۹', mode:'حضوری و آنلاین', tags:['نوجوان','هیجانی','بزرگسال'], bio:'روان‌شناس نوجوان و بزرگسال؛ مشکلات هیجانی، رفتاری و مشاوره فردی.', voice:'سلام، من لیلا همتی هستم. اینجا هستم که بشنوم، بدون اینکه قضاوتت کنم.'},
+  {id:'mahnaz', name:'مهناز همتی', title:'متخصص مشاوره بزرگسال', photo:'https://randomuser.me/api/portraits/women/58.jpg', price:520000, phone:'09120000006', rate:'۴.۸', mode:'حضوری و آنلاین', tags:['بزرگسال','اضطراب','افسردگی'], bio:'متخصص مشاوره بزرگسال؛ اضطراب، افسردگی، اختلالات روانی و رشد فردی.', voice:'سلام، من مهناز همتی هستم. بیا با هم ببینیم چطور می‌تونی سبک‌تر نفس بکشی.'},
+  {id:'hadi', name:'هادی فخار', title:'متخصص مشاوره شغلی', photo:'https://randomuser.me/api/portraits/men/32.jpg', price:550000, phone:'09120000007', rate:'۴.۸', mode:'حضوری و آنلاین', tags:['شغلی','مسیر حرفه‌ای','آینده'], bio:'متخصص مشاوره شغلی و مسیر حرفه‌ای؛ انتخاب رشته و آینده تحصیلی-کاری.', voice:'سلام، من هادی فخار هستم. مسیر شغلی، پیدا کردن خودته.'}
+];
+
+const defaultWorkshops = [
+  {id:'w1', title:'بازی‌درمانی کودک', instructorId:'zeinab', emoji:'🧩', date:'2026-11-16', startTime:'16:00', duration:120, sessions:'۴ جلسه', price:1200000, cap:20, filled:14, desc:'آموزش تکنیک‌های کاربردی بازی‌درمانی برای والدین و مربیان کودکان.'},
+  {id:'w2', title:'تربیت جنسی کودک', instructorId:'arzoo', emoji:'🌱', date:'2026-11-23', startTime:'17:00', duration:120, sessions:'۳ جلسه', price:980000, cap:25, filled:21, desc:'آموزش اصول تربیت جنسی سالم و متناسب با سن کودک.'},
+  {id:'w3', title:'آمادگی پیش از ازدواج', instructorId:'mahnaz', emoji:'💍', date:'2026-11-26', startTime:'18:00', duration:120, sessions:'۵ جلسه', price:1500000, cap:16, filled:16, desc:'بررسی ملاک‌های انتخاب همسر، مهارت‌های ارتباطی و مدیریت تعارض.'},
+  {id:'w4', title:'مدیریت اضطراب نوجوان', instructorId:'leila', emoji:'🧠', date:'2026-12-01', startTime:'16:30', duration:120, sessions:'۴ جلسه', price:1100000, cap:22, filled:9, desc:'شناخت اضطراب نوجوان و آموزش مهارت‌های مقابله‌ای به والدین.'},
+  {id:'w5', title:'استعدادسنجی و انتخاب رشته', instructorId:'reyhaneh', emoji:'🎯', date:'2026-12-06', startTime:'15:00', duration:120, sessions:'۲ جلسه', price:850000, cap:30, filled:11, desc:'آشنایی با ابزارهای استعدادسنجی و انتخاب رشته آگاهانه.'},
+  {id:'w6', title:'مسیر شغلی و آینده حرفه‌ای', instructorId:'hadi', emoji:'💼', date:'2026-12-11', startTime:'17:30', duration:120, sessions:'۳ جلسه', price:1050000, cap:24, filled:6, desc:'طراحی مسیر شغلی، شناخت مهارت‌ها و برنامه‌ریزی برای آینده.'}
+];
+
+/* =========================================================
+   دسترسی‌دهنده‌های داده (با override ادمین)
+   ========================================================= */
+function getTherapists(){
+  const ov = ls.get('therapistOverrides', {});
+  return therapists.map(t => ({
+    ...t,
+    price: ov[t.id]?.price ?? t.price,
+    phone: ov[t.id]?.phone ?? t.phone
+  }));
+}
+function getTherapistById(id){ return getTherapists().find(t => t.id === id); }
+function getWorkshops(){
+  let ws = ls.get('workshops', null);
+  if (!ws){ ws = JSON.parse(JSON.stringify(defaultWorkshops)); ls.set('workshops', ws); }
+  return ws;
+}
+function saveWorkshops(ws){ ls.set('workshops', ws); }
+
+function getBookings(){ return ls.get('bookings', []); }
+function saveBooking(b){
+  const all = getBookings();
+  all.push(b);
+  ls.set('bookings', all);
+}
+
+/* =========================================================
+   زمان‌بندی و تشخیص تداخل
+   ========================================================= */
+const TIME_SLOTS = ['10:00','11:00','12:00','17:00','18:00','19:00','20:00','21:00'];
+
+function getBookedSlots(therapistId, dateISO){
+  return getBookings()
+    .filter(b => b.type === 'consultation' && b.therapistId === therapistId && b.date === dateISO && b.status !== 'cancelled')
+    .map(b => b.time);
+}
+
+function getWorkshopBlockedSlots(therapistId, dateISO){
+  const blocked = new Set();
+  getWorkshops()
+    .filter(w => w.instructorId === therapistId && w.date === dateISO)
+    .forEach(w => {
+      const wsStart = timeToMin(w.startTime);
+      const wsEnd = wsStart + Number(w.duration || 90);
+      TIME_SLOTS.forEach(slot => {
+        const sStart = timeToMin(slot);
+        const sEnd = sStart + 60;
+        if (sStart < wsEnd && sEnd > wsStart) blocked.add(slot);
+      });
+    });
+  return [...blocked];
+}
+
+function isSlotAvailable(therapistId, dateISO, time){
+  return !getBookedSlots(therapistId, dateISO).includes(time)
+      && !getWorkshopBlockedSlots(therapistId, dateISO).includes(time);
+}
+
+/* =========================================================
+   کد رهگیری و پیامک
+   ========================================================= */
+function genTrackCode(prefix='NK'){
+  return prefix + Date.now().toString().slice(-6) + Math.floor(Math.random()*100).toString().padStart(2,'0');
+}
+
+async function sendSMS(to, message, meta = {}){
+  const log = {
+    to, message, meta,
+    time: new Date().toISOString(),
+    status: 'pending'
+  };
+  if (!SMS_CONFIG.enabled || !SMS_CONFIG.proxyUrl){
+    log.status = 'simulated';
+    saveSmsLog(log);
+    console.log('[SMS شبیه‌سازی]', to, '\n' + message);
+    return;
+  }
+  try{
+    const res = await fetch(SMS_CONFIG.proxyUrl, {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({to, message, provider:'kavenegar'})
+    });
+    log.status = res.ok ? 'sent' : 'failed';
+    log.response = await res.text().catch(()=>'');
+  }catch(e){
+    log.status = 'error';
+    log.error = e.message;
+  }
+  saveSmsLog(log);
+}
+function saveSmsLog(log){
+  const logs = ls.get('smsLog', []);
+  logs.unshift(log);
+  if (logs.length > 200) logs.length = 200;
+  ls.set('smsLog', logs);
+}
+
+/* =========================================================
+   Reveal on scroll
+   ========================================================= */
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting){ e.target.classList.add('in'); revealObserver.unobserve(e.target); }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+function observeReveals(){
+  document.querySelectorAll('.reveal:not(.in)').forEach(el => revealObserver.observe(el));
+}
+
+/* =========================================================
+   رندر کارت درمانگرها
+   ========================================================= */
+function renderTherapists(){
+  const list = getTherapists();
+  $('therapistsGrid').innerHTML = list.map((t, i) => `
+    <div class="t-card reveal d${(i % 4) + 1}">
+      <div class="t-head">
+        <div class="t-photo-wrap">
+          <img class="t-photo" src="${t.photo}" alt="${t.name}" loading="lazy"
+               onerror="this.style.display='none';this.parentNode.innerHTML='<div class=t-photo style=display:grid;place-items:center;font-size:26px;background:linear-gradient(135deg,#fbeadb,#fce9d5)'>👤</div>'" />
+          <span class="t-online"></span>
+        </div>
+        <div>
+          <h3>${t.name}</h3>
+          <small>${t.title}</small>
+          <button class="voice-btn" onclick="playTherapistVoice('${t.id}', this)">
+            <span class="wave">▶</span> صدای درمانگر
+          </button>
+        </div>
+        <span class="rate">★ ${t.rate}</span>
+      </div>
+      <div class="tags">${t.tags.map(x => `<span class="tag">${x}</span>`).join('')}</div>
+      <p class="t-bio">${t.bio}</p>
+      <div class="t-foot">
+        <span class="price">${money(t.price)}<br><small>هر جلسه · ${t.mode}</small></span>
+        <button class="btn btn-primary" onclick="openBooking('${t.id}')">رزرو نوبت</button>
+      </div>
+    </div>
+  `).join('');
+  observeReveals();
+}
+
+/* صدا درمانگر */
+let currentVoiceBtn = null;
+function playTherapistVoice(id, btn){
+  const t = getTherapistById(id);
+  if (!t) return;
+  if (!('speechSynthesis' in window)){ toast('مرورگر شما از پخش صدا پشتیبانی نمی‌کند'); return; }
+  if (currentVoiceBtn === btn && speechSynthesis.speaking){
+    speechSynthesis.cancel();
+    btn.classList.remove('playing');
+    btn.innerHTML = '<span class="wave">▶</span> صدای درمانگر';
+    currentVoiceBtn = null;
+    return;
+  }
+  speechSynthesis.cancel();
+  document.querySelectorAll('.voice-btn.playing').forEach(b => {
+    b.classList.remove('playing');
+    b.innerHTML = '<span class="wave">▶</span> صدای درمانگر';
+  });
+  const utter = new SpeechSynthesisUtterance(t.voice);
+  utter.lang = 'fa-IR'; utter.rate = 0.92; utter.pitch = 1.05;
+  btn.classList.add('playing');
+  btn.innerHTML = '<span class="wave">⏸</span> در حال پخش...';
+  currentVoiceBtn = btn;
+  utter.onend = () => {
+    btn.classList.remove('playing');
+    btn.innerHTML = '<span class="wave">▶</span> صدای درمانگر';
+    currentVoiceBtn = null;
+  };
+  speechSynthesis.speak(utter);
+}
+
+/* =========================================================
+   رندر کارگاه‌ها
+   ========================================================= */
+function renderWorkshops(){
+  const list = getWorkshops();
+  $('workshopsGrid').innerHTML = list.map((w, i) => {
+    const pct = Math.round(w.filled / w.cap * 100);
+    const full = w.filled >= w.cap;
+    const inst = getTherapistById(w.instructorId);
+    const instName = inst ? inst.name : w.instructorId;
+    const timeStr = toFaTime(w.startTime) + ' تا ' + toFaTime(addMinutes(w.startTime, Number(w.duration || 90)));
+    return `
+    <div class="w-card reveal d${(i % 3) + 1}">
+      <div class="w-top">
+        <div class="w-emoji">${w.emoji}</div>
+        <div><h3>${w.title}</h3><small>مدرس: ${instName}</small></div>
+      </div>
+      <div class="w-body">
+        <p class="w-bio">${w.desc}</p>
+        <div class="w-meta"><span>📅 ${faDateShort(w.date)}</span><span>🕐 ${timeStr}</span><span>📚 ${w.sessions}</span></div>
+        <div class="cap">
+          <div class="cap-top"><span>ظرفیت باقی‌مانده</span><span>${toFa(Math.max(0, w.cap - w.filled))} از ${toFa(w.cap)} نفر</span></div>
+          <div class="cap-bar ${full ? 'full' : ''}"><i style="width:${pct}%"></i></div>
+        </div>
+        <div class="w-foot">
+          <span class="price">${money(w.price)}<br><small>کل دوره</small></span>
+          <button class="btn ${full ? 'btn-ghost' : 'btn-primary'}" onclick="${full ? `toast('ظرفیت این کارگاه تکمیل شده است')` : `openWorkshop('${w.id}')`}">${full ? 'تکمیل ظرفیت' : 'ثبت‌نام'}</button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+  observeReveals();
+}
+
+/* =========================================================
+   رندر قصه‌ها
+   ========================================================= */
+const stories = [
+  {emoji:'🌅', bg:'linear-gradient(135deg,#fce7d3,#f7dcc7)', tag:'مسیر اضطراب', title:'سارا، از هفته‌ای که فقط گریه می‌کرد تا صبحی که قهوه‌اش را درست کرد', text:'هفته‌ی اول، فقط می‌خواست بشینیم و هیچی نگیم. گفت «حرف زدن خسته‌ام می‌کنه». ما شنیدیم. قدم اول، فقط همین بود...', who:'سارا، ۳۲ ساله — ۴ ماه پیش'},
+  {emoji:'🌱', bg:'linear-gradient(135deg,#e0f2ea,#c8e0d5)', tag:'مسیر کودک', title:'آرمین، پسری که فقط با ماشین‌هاش حرف می‌زد', text:'مادرش می‌گفت «با من حرف نمی‌زنه، فقط بازی می‌کنه». ما شروع کردیم به بازی کردن با هم. در دل بازی، آرمین پیدا شد...', who:'مادر آرمین، آرمین ۵ ساله — ۶ ماه پیش'},
+  {emoji:'🕯️', bg:'linear-gradient(135deg,#f5d4be,#efc0a6)', tag:'مسیر ازدواج', title:'نازنین، از «شاید اشتباه می‌کنم» تا «حالا می‌دونم چی می‌خوام»', text:'قبل از تصمیم بزرگ، گفت «دلم نمی‌خواد کسی برام تصمیم بگیره، ولی خودم هم نمی‌تونم». قدم اول، شناختن خودش بود...', who:'نازنین، ۲۸ ساله — ۸ ماه پیش'},
+  {emoji:'🌊', bg:'linear-gradient(135deg,#dfeae3,#c8d8d0)', tag:'مسیر شغلی', title:'رضا، از «نمی‌دونم چی می‌خوام» تا «یه مسیر پیدا کردم»', text:'۳۰ سالش بود و هنوز نمی‌دونست واقعاً چی می‌خواد. با هم شروع کردیم به کندن لایه‌ها. آخرش، یه چیز ساده کشف شد...', who:'رضا، ۳۰ ساله — ۵ ماه پیش'}
+];
+function renderStories(){
+  $('storiesScroll').innerHTML = stories.map(s => `
+    <div class="story">
+      <div class="story-illus" style="background:${s.bg}">${s.emoji}</div>
+      <span class="story-tag">${s.tag}</span>
+      <h3>${s.title}</h3>
+      <p>${s.text}</p>
+      <div class="story-who">${s.who}</div>
+    </div>
+  `).join('');
+}
+
+/* =========================================================
+   دیوار همراهان
+   ========================================================= */
+const wallDefaults = [
+  {text:'داشتم می‌شکستم، ولی اینجا یاد گرفتم چطور خودم رو ببخشم.', who:'ن.، ۲۸ ساله'},
+  {text:'فکر می‌کردم فقط من این‌طوریم. نبودم.', who:'ر.، ۳۵ ساله'},
+  {text:'اولین بار که تونستم بدون گریه درباره‌ی مادرم حرف بزنم، همین‌جا بود.', who:'م.، ۴۲ ساله'},
+  {text:'قدم اول رو که برداشتم، دیدم اون‌قدرها هم که فکر می‌کردم سخت نبود.', who:'س.، ۲۶ ساله'},
+  {text:'اینجا یاد گرفتم که التیام، یه خط راست نیست. یه مسیره.', who:'ه.، ۳۸ ساله'},
+  {text:'ممنون که هستید. حتی همین دیوار، یه جور آرامشه.', who:'آ.، ۳۱ ساله'}
+];
+function loadWall(){
+  let notes = ls.get('wall', null);
+  if (!notes){ notes = wallDefaults.slice(); ls.set('wall', notes); }
+  $('wallGrid').innerHTML = notes.map(n => `
+    <div class="wall-note reveal">${n.text}<small>— ${n.who}</small></div>
+  `).join('');
+  observeReveals();
+}
+function addWallNote(){
+  const val = $('wallInput').value.trim();
+  if (val.length < 3){ toast('یک جمله‌ی کوتاه بنویس 🌿'); return; }
+  const notes = ls.get('wall', []);
+  notes.unshift({ text: val, who: 'ناشناس' });
+  ls.set('wall', notes);
+  $('wallInput').value = '';
+  loadWall();
+  toast('💌 جمله‌ی شما روی دیوار ثبت شد.');
+}
+
+/* =========================================================
+   نامه به آینده
+   ========================================================= */
+function sendLetter(){
+  const name = $('letterName').value.trim();
+  const email = $('letterEmail').value.trim();
+  const text = $('letterText').value.trim();
+  if (text.length < 10){ toast('لطفاً چند جمله بیشتر بنویس ✉️'); return; }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ toast('لطفاً ایمیل معتبر وارد کن'); return; }
+  const letters = ls.get('letters', []);
+  letters.push({ name, email, text, date: new Date().toISOString() });
+  ls.set('letters', letters);
+  $('letterName').value = ''; $('letterEmail').value = ''; $('letterText').value = '';
+  fireConfetti();
+  toast('✉️ نامه‌ات ثبت شد. سه ماه دیگه برات می‌فرستیم.');
+}
+
+/* =========================================================
+   ژورنال
+   ========================================================= */
+function loadJournalMoodBadge(){
+  const mood = ls.get('mood', null);
+  const badge = $('journalMoodBadge');
+  if (mood && moodThemeLabels[mood]) badge.textContent = 'حال امروز: ' + moodThemeLabels[mood];
+  else badge.textContent = 'حال امروز: —';
+}
+function loadJournal(){
+  const entries = ls.get('journal', []);
+  const container = $('journalChart');
+  if (!entries.length){
+    container.innerHTML = '<div class="journal-empty">هنوز چیزی ثبت نکردی.<br>با یک جمله‌ی کوچک شروع کن 🌱</div>';
+    return;
+  }
+  const last14 = entries.slice(-14);
+  container.innerHTML = `
+    <div class="journal-chart">
+      ${last14.map(e => {
+        const d = new Date(e.date);
+        const label = new Intl.DateTimeFormat('fa-IR',{day:'numeric',month:'short'}).format(d);
+        const h = Math.max(20, Math.min(100, (e.text.length + 20)));
+        return `<div class="jbar" style="height:${h}%;" data-tip="${label}: ${e.text.slice(0,20)}..."></div>`;
+      }).join('')}
+    </div>
+    <div class="journal-stats">
+      <span>${toFa(last14.length)} ثبت اخیر</span><span>${toFa(entries.length)} کل ثبت</span>
+    </div>
+    <div style="margin-top:12px;font-size:12px;color:#8a7565;line-height:1.9">
+      ${entries.slice(-1)[0] ? 'آخرین ثبت: «' + entries.slice(-1)[0].text + '»' : ''}
+    </div>
+  `;
+}
+function addJournalEntry(){
+  const val = $('journalInput').value.trim();
+  if (val.length < 2){ toast('یک جمله کوچک بنویس 🌿'); return; }
+  const entries = ls.get('journal', []);
+  entries.push({ text: val, date: new Date().toISOString() });
+  ls.set('journal', entries);
+  $('journalInput').value = '';
+  loadJournal();
+  toast('📝 ثبت شد. یه ردپای کوچیک از خودت گذاشتی.');
+}
+
+/* =========================================================
+   FAQ
+   ========================================================= */
+const faqs = [
+  {q:'چطور نوبت مشاوره رزرو کنم؟',a:'روی دکمه «رزرو نوبت» بزنید، درمانگر و زمان مورد نظر را انتخاب کنید و اطلاعات خود را وارد نمایید. کد رهگیری بلافاصله صادر می‌شود و پیامک تأیید برای شما و درمانگر ارسال می‌گردد.'},
+  {q:'جلسات حضوری است یا آنلاین؟',a:'هر دو حالت امکان‌پذیر است. در مرحله اول رزرو می‌توانید نوع جلسه را انتخاب کنید.'},
+  {q:'هزینه هر جلسه چقدر است؟',a:'هزینه جلسات بسته به درمانگر متفاوت است و در صفحه هر درمانگر نمایش داده می‌شود.'},
+  {q:'حریم خصوصی من چطور حفظ می‌شود؟',a:'تمام جلسات و اطلاعات شما محرمانه است. با کلیک روی آیکن 👁️ می‌توانید هر لحظه به صفحه‌ی خنثی بروید.'},
+  {q:'امکان لغو یا جابه‌جایی نوبت وجود دارد؟',a:'بله، تا ۲۴ ساعت قبل از جلسه با تماس با مرکز می‌توانید نوبت خود را لغو یا جابه‌جا کنید.'},
+  {q:'ثبت‌نام در کارگاه چطور پرداخت می‌شود؟',a:'برای کارگاه‌ها می‌توانید ۲۰٪ مبلغ را به عنوان پیش‌پرداخت پرداخت کنید و باقی را روز شروع کارگاه در مرکز کارت بکشید، یا کل مبلغ را آنلاین پرداخت کنید.'},
+  {q:'کارگاه‌ها چه مدرکی دارند؟',a:'در پایان هر کارگاه، گواهی حضور معتبر از سوی مرکز مشاوره نگاهی نو صادر می‌شود.'}
+];
+function renderFaq(){
+  $('faqBox').innerHTML = faqs.map((f, i) => `
+    <div class="faq-item reveal" id="faq-${i}">
+      <button class="faq-q" onclick="toggleFaq(${i})">${f.q}<span>+</span></button>
+      <div class="faq-a"><div>${f.a}</div></div>
+    </div>
+  `).join('');
+  observeReveals();
+}
+function toggleFaq(i){
+  const item = $('faq-' + i);
+  const ans = item.querySelector('.faq-a');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(el => {
+    el.classList.remove('open');
+    el.querySelector('.faq-a').style.maxHeight = null;
+  });
+  if (!isOpen){ item.classList.add('open'); ans.style.maxHeight = ans.scrollHeight + 'px'; }
+}
+
+/* =========================================================
+   مود انتخاب حال
+   ========================================================= */
+const moodThemes = {
+  happy: { label:'شاد و سرحال', emoji:'😊', '--primary':'#e89060', '--primary-3':'#d06840', '--gold':'#e9b44c', '--accent':'#8ab89c', pill:'🌞 امروز چه روز خوبی!', tag:'امروز حالت خوبه — بیا از این انرژی مراقبت کنیم.' },
+  confused: { label:'سردرگم', emoji:'😶‍🌫️', '--primary':'#a896c4', '--primary-3':'#8878a8', '--gold':'#d4b8dc', '--accent':'#9aacb8', pill:'🌫️ امروز کمی مه‌آلوده', tag:'سردرگمی هم بخشی از مسیره. قدم به قدم روشنش می‌کنیم.' },
+  sad: { label:'غمگین', emoji:'😔', '--primary':'#8a9cb8', '--primary-3':'#6a7c98', '--gold':'#c4c4b8', '--accent':'#8aa8a0', pill:'🌧️ امروز بارونیه، اشکالی نداره', tag:'غم، خبر از قلب زنده‌ای می‌ده. اینجا فضای امنیه.' },
+  anxious: { label:'مضطرب', emoji:'😰', '--primary':'#88b0a0', '--primary-3':'#68908a', '--gold':'#b8ccb0', '--accent':'#a8c0b8', pill:'🌿 یک نفس عمیق، تو امنی', tag:'نفس بکش. اینجا هیچ اتفاق بدی نمی‌افته.' },
+  angry: { label:'عصبانی', emoji:'😤', '--primary':'#d67040', '--primary-3':'#b04c28', '--gold':'#e8a050', '--accent':'#c48060', pill:'🔥 این خشم، خبر از یک مرز داره', tag:'عصبانیت هم یه پیام داره. بیا بشنویمش.' },
+  tired: { label:'خسته', emoji:'🫥', '--primary':'#b8a088', '--primary-3':'#98806a', '--gold':'#d4c0a0', '--accent':'#a8b0a0', pill:'🌙 امروز استراحت لازم داری', tag:'خستگی نشونه‌ی ضعف نیست. بیا کمی کنار هم استراحت کنیم.' }
+};
+const moodThemeLabels = Object.fromEntries(Object.entries(moodThemes).map(([k,v]) => [k, v.emoji + ' ' + v.label]));
+
+function applyMoodTheme(key){
+  const theme = moodThemes[key];
+  if (!theme) return;
+  const root = document.documentElement;
+  ['--primary','--primary-3','--gold','--accent'].forEach(p => { if (theme[p]) root.style.setProperty(p, theme[p]); });
+  $('heroPill').textContent = theme.pill;
+  $('heroTagline').textContent = theme.tag;
+  document.body.dataset.mood = key;
+  loadJournalMoodBadge();
+}
+function showMoodPicker(){
+  $('moodGrid').innerHTML = Object.entries(moodThemes).map(([k,v], i) => `
+    <button class="mood-btn" onclick="selectMood('${k}')" style="animation-delay:${i*0.06}s">
+      <span class="emo">${v.emoji}</span><b>${v.label}</b>
+    </button>
+  `).join('');
+  $('moodScreen').classList.add('show');
+}
+function hideMoodPicker(){ $('moodScreen').classList.remove('show'); }
+function selectMood(key){
+  ls.set('mood', key);
+  applyMoodTheme(key);
+  hideMoodPicker();
+  toast('🌿 فضای سایت با حال امروزت هماهنگ شد');
+  setTimeout(() => {
+    if (!chatStarted){
+      openAssistant();
+      botSay(moodAssistantMessage(key), 900);
+    }
+  }, 600);
+}
+function skipMood(){ hideMoodPicker(); ls.set('moodSkipped', true); }
+function moodAssistantMessage(key){
+  const msgs = {
+    happy: 'چه خوب که امروز حالت خوبه 🌞 دوست داری این انرژی رو با یه قدم مثبت ادامه بدیم؟',
+    confused: 'می‌دونم سردرگمی سخته 🌫️ ولی لازم نیست همه‌چیز رو همین الان بفهمی.',
+    sad: 'می‌بینم امروز سنگینه 🌧️ لازم نیست الان کاری کنی. اینجا فقط بشین، من کنارتم.',
+    anxious: 'نفس عمیق بکش 🌿 تو الان اینجایی، جایی که امنه.',
+    angry: 'عصبانیتت رو می‌بینم 🔥 بیا با هم ببینیم این خشم، چه پیامی برات داره.',
+    tired: 'خستگی رو حس می‌کنم 🫥 امروز فقط استراحت کن. من اینجام.'
+  };
+  return msgs[key] || 'سلام، اینجام که کمکت کنم.';
+}
+
+/* =========================================================
+   جعبه آرامش
+   ========================================================= */
+let breathTimer = null, ambientCtx = null, ambientNodes = null, currentAmbient = null;
+const ambientGainDefault = 0.06;
+
+function openCalm(tab){
+  $('calmPanel').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  calmTab(tab || 'breath');
+}
+function closeCalm(){
+  $('calmPanel').classList.remove('open');
+  if (!document.querySelector('.modal.open')) document.body.style.overflow = '';
+  stopBreathing(); stopAmbient();
+}
+function calmTab(name, btn){
+  document.querySelectorAll('.calm-tab').forEach(t => t.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  else {
+    const map = {breath:0, ground:1, amb:2, quote:3};
+    const tabs = document.querySelectorAll('.calm-tab');
+    if (tabs[map[name]]) tabs[map[name]].classList.add('active');
+  }
+  stopBreathing();
+  renderCalmBody(name);
+}
+function renderCalmBody(name){
+  const body = $('calmBody');
+  if (name === 'breath') body.innerHTML = breathHTML();
+  else if (name === 'ground') body.innerHTML = groundHTML();
+  else if (name === 'amb') body.innerHTML = ambHTML();
+  else if (name === 'quote') body.innerHTML = quoteHTML();
+  if (name === 'breath') startBreathing();
+  if (name === 'amb') updateAmbientButtons();
+}
+function breathHTML(){
+  return `
+    <div class="breath-stage">
+      <div class="breath-ring" id="breathRing"><div class="counter" id="breathCounter">۴<small>دم</small></div></div>
+      <div class="breath-label" id="breathLabel">آماده‌ای؟</div>
+      <div class="breath-cycle" id="breathCycle">چرخه: ۰ / ۴</div>
+      <button class="btn btn-primary" onclick="startBreathing()" style="padding:10px 24px;font-size:13px">▶ شروع مجدد</button>
+    </div>`;
+}
+function startBreathing(){
+  stopBreathing();
+  const ring = $('breathRing'), counter = $('breathCounter'), label = $('breathLabel'), cycleEl = $('breathCycle');
+  if (!ring) return;
+  let cycle = 0; const totalCycles = 4;
+  function runCycle(){
+    if (cycle >= totalCycles){ label.textContent = 'آفرین 🌿'; counter.innerHTML = '✓'; ring.className = 'breath-ring'; return; }
+    cycle++; cycleEl.textContent = `چرخه: ${toFa(cycle)} / ${toFa(totalCycles)}`;
+    ring.className = 'breath-ring inhale'; label.textContent = 'دم بگیر...';
+    let c = 4; counter.innerHTML = `${toFa(c)}<small>دم</small>`;
+    const inhale = setInterval(() => { c--; if (c > 0) counter.innerHTML = `${toFa(c)}<small>دم</small>`; else clearInterval(inhale); }, 1000);
+    breathTimer = setTimeout(() => {
+      ring.className = 'breath-ring hold'; label.textContent = 'نگه دار...';
+      c = 7; counter.innerHTML = `${toFa(c)}<small>نگه</small>`;
+      const hold = setInterval(() => { c--; if (c > 0) counter.innerHTML = `${toFa(c)}<small>نگه</small>`; else clearInterval(hold); }, 1000);
+      breathTimer = setTimeout(() => {
+        ring.className = 'breath-ring exhale'; label.textContent = 'آروم بازدم...';
+        c = 8; counter.innerHTML = `${toFa(c)}<small>بازدم</small>`;
+        const exhale = setInterval(() => { c--; if (c > 0) counter.innerHTML = `${toFa(c)}<small>بازدم</small>`; else clearInterval(exhale); }, 1000);
+        breathTimer = setTimeout(runCycle, 8000);
+      }, 7000);
+    }, 4000);
+  }
+  runCycle();
+}
+function stopBreathing(){ if (breathTimer){ clearTimeout(breathTimer); breathTimer = null; } }
+function groundHTML(){
+  const steps = [
+    {n:5, sense:'چیزهایی که می‌بینی', hint:'۵ چیز دور و برت رو ببین'},
+    {n:4, sense:'صداهایی که می‌شنوی', hint:'۴ صدای مختلف رو گوش کن'},
+    {n:3, sense:'چیزهایی که لمس می‌کنی', hint:'۳ چیز رو لمس کن'},
+    {n:2, sense:'بوهایی که حس می‌کنی', hint:'۲ بو پیدا کن'},
+    {n:1, sense:'مزه‌ای در دهانت', hint:'۱ مزه رو حس کن'}
+  ];
+  return `
+    <div style="font-size:13px;color:var(--muted);margin-bottom:16px;line-height:2">این تمرین بهت کمک می‌کنه به لحظه‌ی حال برگردی.</div>
+    ${steps.map(s => `
+      <div class="ground-step">
+        <h4>${toFa(s.n)} ${s.sense}</h4><p>${s.hint}</p>
+        <div class="ground-inputs">${Array.from({length:s.n}).map((_,i) => `<input placeholder="${i+1}. ..." />`).join('')}</div>
+      </div>`).join('')}
+    <div style="margin-top:8px;font-size:12px;color:#8a7565;line-height:2;text-align:center">اینها فقط برای خودت هستن.</div>`;
+}
+function ambHTML(){
+  return `
+    <div style="font-size:13px;color:var(--muted);margin-bottom:14px;line-height:2">یک صدا انتخاب کن و بذار فضای اطرافت آرام‌تر بشه.</div>
+    <div class="amb-grid">
+      <button class="amb-btn" onclick="toggleAmb('rain')" data-amb="rain"><span class="amb-emo">🌧️</span><b>باران</b><small>ملایم</small></button>
+      <button class="amb-btn" onclick="toggleAmb('forest')" data-amb="forest"><span class="amb-emo">🌲</span><b>جنگل</b><small>خش‌خش</small></button>
+      <button class="amb-btn" onclick="toggleAmb('waves')" data-amb="waves"><span class="amb-emo">🌊</span><b>دریا</b><small>موج</small></button>
+      <button class="amb-btn" onclick="toggleAmb('wind')" data-amb="wind"><span class="amb-emo">🍃</span><b>نسیم</b><small>آروم</small></button>
+    </div>
+    <div style="text-align:center;margin-top:16px"><button class="btn btn-ghost" onclick="stopAmbient();updateAmbientButtons()" style="font-size:12px;padding:9px 18px">⏹ توقف</button></div>`;
+}
+function updateAmbientButtons(){ document.querySelectorAll('.amb-btn').forEach(b => b.classList.toggle('active', b.dataset.amb === currentAmbient)); }
+function getAudioCtx(){ if (!ambientCtx) ambientCtx = new (window.AudioContext || window.webkitAudioContext)(); return ambientCtx; }
+function createNoiseBuffer(ctx, type){
+  const dur = 3;
+  const buf = ctx.createBuffer(1, ctx.sampleRate * dur, ctx.sampleRate);
+  const data = buf.getChannelData(0);
+  if (type === 'rain'){ for (let i = 0; i < data.length; i++) data[i] = (Math.random() * 2 - 1) * 0.4; }
+  else if (type === 'forest'){ let last = 0; for (let i = 0; i < data.length; i++){ data[i] = (last + 0.02 * (Math.random() * 2 - 1)) / 1.02; last = data[i]; } }
+  else if (type === 'waves'){ for (let i = 0; i < data.length; i++){ const t = i / ctx.sampleRate; const mod = 0.5 + 0.5 * Math.sin(t * 0.5); data[i] = (Math.random() * 2 - 1) * 0.3 * mod; } }
+  else if (type === 'wind'){ let last = 0; for (let i = 0; i < data.length; i++){ data[i] = (last + 0.008 * (Math.random() * 2 - 1)) / 1.02; last = data[i]; } }
+  return buf;
+}
+function toggleAmb(type){
+  if (currentAmbient === type){ stopAmbient(); updateAmbientButtons(); return; }
+  stopAmbient();
+  const ctx = getAudioCtx();
+  const buffer = createNoiseBuffer(ctx, type);
+  const source = ctx.createBufferSource(); source.buffer = buffer; source.loop = true;
+  const gain = ctx.createGain(); gain.gain.value = ambientGainDefault;
+  source.connect(gain).connect(ctx.destination); source.start();
+  ambientNodes = { source, gain }; currentAmbient = type;
+  updateAmbientButtons();
+  toast('🎧 صدای ' + ({rain:'بارون',forest:'جنگل',waves:'دریا',wind:'نسیم'}[type]));
+}
+function stopAmbient(){
+  if (ambientNodes){ try { ambientNodes.source.stop(); } catch(e){} try { ambientNodes.gain.disconnect(); } catch(e){} ambientNodes = null; }
+  currentAmbient = null;
+}
+function toggleAmbient(){
+  const btn = $('soundToggle');
+  if (currentAmbient){ stopAmbient(); btn.classList.remove('active'); toast('صدای پس‌زمینه خاموش شد'); }
+  else { toggleAmb('rain'); btn.classList.add('active'); }
+  updateAmbientButtons();
+}
+const quotes = [
+  { text:'تا زمانی که نفس می‌کشی، امیدی هست.', author:'ضرب‌المثل'},
+  { text:'زخم‌ها، جاهایی هستند که نور از آن‌ها وارد می‌شود.', author:'جبران خلیل جبران'},
+  { text:'تو لازم نیست کامل باشی. فقط لازمه خودت باشی.', author:'—'},
+  { text:'آرامش، نه در نبود طوفان، بلکه در هماهنگی با آن است.', author:'—'},
+  { text:'هر روز، فرصت تازه‌ای برای شروع است.', author:'—'},
+  { text:'بهترین کارها، با کوچک‌ترین قدم‌ها شروع می‌شوند.', author:'—'}
+];
+let currentQuote = 0;
+function quoteHTML(){
+  const q = quotes[currentQuote];
+  return `<div class="quote-stage"><div class="quote-mark">❝</div><div class="quote-text">${q.text}</div><div class="quote-author">— ${q.author}</div><button class="quote-refresh" onclick="nextQuote()">جمله‌ی دیگری 💫</button></div>`;
+}
+function nextQuote(){ currentQuote = (currentQuote + 1) % quotes.length; $('calmBody').innerHTML = quoteHTML(); }
+
+/* =========================================================
+   تور قدم اول
+   ========================================================= */
+const tourSteps = [
+  { emoji:'🌿', title:'قبل از هر چیز...', text:'می‌خوام یه لحظه با هم آشنا بشیم. اینجا قرار نیست هیچ کاری رو اجبار انجام بدی.' },
+  { emoji:'🫂', title:'چه چیزی تو رو به اینجا آورد؟', text:'ممکنه دنبال یه شنونده باشی، یه راه‌حل، یا فقط یه جای امن. هر کدومش درسته.' },
+  { emoji:'🌬️', title:'یه لحظه نفس بکش', text:'قبل از ادامه، ۱۵ ثانیه فقط نفس بکش. آروم، عمیق. حس کن هوا وارد بدنت می‌شه.' },
+  { emoji:'🌱', title:'قدم اول رو با هم برداریم', text:'حالا که اینجایی، پیشنهاد می‌کنم بذاری دستیار هوشمند با چند سؤال کوتاه، بهترین مسیر رو پیش پات بذاره.' }
+];
+let tourIndex = 0;
+function openTour(){ tourIndex = 0; updateTour(); $('tourScreen').classList.add('show'); }
+function tourNext(){
+  tourIndex++;
+  if (tourIndex >= tourSteps.length){
+    closeTour();
+    setTimeout(() => openAssistant(), 400);
+    return;
+  }
+  updateTour();
+}
+function updateTour(){
+  const s = tourSteps[tourIndex];
+  $('tourIllus').textContent = s.emoji;
+  $('tourTitle').textContent = s.title;
+  $('tourText').textContent = s.text;
+  $('tourDots').innerHTML = tourSteps.map((_, i) => `<i class="${i === tourIndex ? 'on' : ''}"></i>`).join('');
+  const actions = $('tourActions');
+  if (tourIndex === tourSteps.length - 1){
+    actions.innerHTML = `
+      <button class="btn btn-primary" onclick="tourNext()">بذار دستیار کمکم کنه ›</button>
+      <button class="btn btn-ghost" onclick="closeTour()">فعلاً نه</button>`;
+  } else {
+    actions.innerHTML = `<button class="btn btn-primary" onclick="tourNext()">قدم بعدی ›</button>`;
+  }
+}
+function closeTour(){ $('tourScreen').classList.remove('show'); }
+
+/* =========================================================
+   حریم خصوصی
+   ========================================================= */
+function enterPrivacy(){ $('privacyPage').classList.add('show'); }
+function exitPrivacy(){ $('privacyPage').classList.remove('show'); }
+
+/* =========================================================
+   دستیار
+   ========================================================= */
+let chatStarted = false;
+function openAssistant(){
+  $('asst').classList.add('open');
+  $('asstLauncher').classList.add('hide');
+  if (!chatStarted){ chatStarted = true; asstWelcome(); }
+}
+function closeAssistant(){
+  $('asst').classList.remove('open');
+  $('asstLauncher').classList.remove('hide');
+  document.body.style.overflow = '';
+}
+function asstWelcome(){
+  setTimeout(() => botSay('سلام 🌿 خوش اومدی. من دستیار هوشمند مرکز نگاهی نو هستم. با چند سؤال کوتاه، بهترین مسیر رو پیش پات می‌ذارم. آماده‌ای؟', 400), 200);
+  setTimeout(() => renderOpts([
+    { label:'می‌خوام مشاوره رزرو کنم', action: () => { addMe('می‌خوام مشاوره رزرو کنم'); openBooking(); } },
+    { label:'دنبال درمانگر مناسبم', action: () => { addMe('دنبال درمانگر مناسبم'); botSay('عالیه! کدوم یکی از این حوزه‌ها بهت نزدیک‌تره؟', 400); renderOpts([
+      { label:'کودک و نوجوان', action: () => openBooking('zeinab') },
+      { label:'اضطراب و افسردگی', action: () => openBooking('mahnaz') },
+      { label:'مشاوره شغلی', action: () => openBooking('hadi') },
+      { label:'ازدواج و رابطه', action: () => openBooking('mahnaz') }
+    ]); } },
+    { label:'کارگاه می‌خوام', action: () => { addMe('کارگاه می‌خوام'); document.getElementById('workshops').scrollIntoView({behavior:'smooth'}); closeAssistant(); } },
+    { label:'فقط می‌خوام حرف بزنم', action: () => { addMe('فقط می‌خوام حرف بزنم'); botSay('حتماً. من اینجام که بشنوم. هر چی دوست داری بنویس.', 400); } }
+  ]), 1200);
+}
+function addMe(text){
+  const log = $('asstLog');
+  const div = document.createElement('div');
+  div.className = 'msg me';
+  div.textContent = text;
+  log.appendChild(div);
+  log.scrollTop = log.scrollHeight;
+}
+function botSay(text, delay = 0){
+  if (delay > 0){
+    const log = $('asstLog');
+    const typing = document.createElement('div');
+    typing.className = 'msg typing';
+    typing.innerHTML = '<i></i><i></i><i></i>';
+    log.appendChild(typing);
+    log.scrollTop = log.scrollHeight;
+    setTimeout(() => { typing.remove(); actuallyBotSay(text); }, delay);
+  } else actuallyBotSay(text);
+}
+function actuallyBotSay(text){
+  const log = $('asstLog');
+  const div = document.createElement('div');
+  div.className = 'msg bot';
+  div.innerHTML = text;
+  log.appendChild(div);
+  log.scrollTop = log.scrollHeight;
+}
+function renderOpts(opts){
+  const box = $('asstOpts');
+  box.innerHTML = '';
+  opts.forEach(o => {
+    const btn = document.createElement('button');
+    btn.className = 'opt-chip';
+    btn.textContent = o.label;
+    btn.onclick = o.action;
+    box.appendChild(btn);
+  });
+}
+function sendUserText(){
+  const v = $('asstText').value.trim();
+  if (!v) return;
+  addMe(v);
+  $('asstText').value = '';
+  $('asstOpts').innerHTML = '';
+  setTimeout(() => {
+    if (/رزرو|نوبت|وقت/.test(v)){
+      botSay('حتماً! برات فرم رزرو رو باز می‌کنم 🌿', 400);
+      setTimeout(() => openBooking(), 900);
+    } else if (/قیمت|هزینه|پول/.test(v)){
+      botSay('هزینه جلسات بستگی به درمانگر داره، بین ۴۵۰ تا ۵۵۰ هزار تومان. برای کارگاه‌ها هم امکان پرداخت ۲۰٪ پیش‌پرداخت وجود داره.', 500);
+    } else if (/کارگاه/.test(v)){
+      botSay('کارگاه‌های ما در حوزه‌های کودک، نوجوان، ازدواج و شغلی برگزار می‌شن. برای دیدن لیست به بخش کارگاه‌ها سر بزن.', 500);
+    } else {
+      botSay('ممنون که نوشتی 🌿 می‌شنوم. اگر بخوای می‌تونم برات یه درمانگر پیشنهاد بدم یا فرم رزرو باز کنم.', 600);
+    }
+  }, 300);
+}
+function toggleVoiceInput(){
+  if (!('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)){
+    toast('مرورگر شما از ورودی صوتی پشتیبانی نمی‌کند'); return;
+  }
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const rec = new SR();
+  rec.lang = 'fa-IR';
+  rec.continuous = false;
+  const mic = $('asstMic');
+  mic.classList.add('recording');
+  rec.onresult = e => { $('asstText').value = e.results[0][0].transcript; mic.classList.remove('recording'); };
+  rec.onerror = () => { mic.classList.remove('recording'); toast('خطا در تشخیص صدا'); };
+  rec.onend = () => mic.classList.remove('recording');
+  rec.start();
+}
+
+/* =========================================================
+   🎯 سیستم رزرو مشاوره
+   ========================================================= */
+let bState = { mode: null, therapistId: null, date: null, time: null };
+
+function openBooking(therapistId){
+  bState = { mode: null, therapistId: therapistId || null, date: null, time: null };
+  $('bName').value = ''; $('bPhone').value = ''; $('bNote').value = '';
+  setStep(1);
+  renderBookingModes();
+  renderBookingTherapists();
+  openModal('mBooking');
+}
+
+function renderBookingModes(){
+  const modes = ['حضوری', 'آنلاین'];
+  $('bModes').innerHTML = modes.map(m => `<button class="chip ${bState.mode === m ? 'active' : ''}" onclick="pickMode('${m}')">${m}</button>`).join('');
+}
+function pickMode(m){ bState.mode = m; renderBookingModes(); }
+
+function renderBookingTherapists(){
+  const list = getTherapists();
+  $('bTherapists').innerHTML = list.map(t => {
+    // بررسی اینکه این درمانگر در ۱۰ روز آینده حداقل یک اسلات خالی دارد یا نه
+    const dates = getAvailableDates();
+    const hasAny = dates.some(d => TIME_SLOTS.some(tm => isSlotAvailable(t.id, d.iso, tm)));
+    const cls = bState.therapistId === t.id ? 'active' : (hasAny ? '' : 'disabled');
+    return `<button class="chip ${cls}" ${hasAny ? `onclick="pickTherapist('${t.id}')"` : 'disabled'}>
+      ${t.name} <small style="font-weight:600;opacity:.7">(${money(t.price)})</small>
+    </button>`;
+  }).join('');
+}
+function pickTherapist(id){ bState.therapistId = id; bState.date = null; bState.time = null; renderBookingTherapists(); }
+
+function renderBookingDates(){
+  const dates = getAvailableDates();
+  $('bDates').innerHTML = dates.map(d => {
+    const available = TIME_SLOTS.filter(tm => isSlotAvailable(bState.therapistId, d.iso, tm)).length;
+    const cls = bState.date === d.iso ? 'active' : (available === 0 ? 'disabled' : '');
+    return `<button class="chip ${cls}" style="white-space:nowrap;min-width:130px" ${available === 0 ? 'disabled' : `onclick="pickDate('${d.iso}')"`}>
+      <div style="font-size:11.5px">${d.display}</div>
+      <div style="font-size:10px;opacity:.7;margin-top:2px">${available === 0 ? 'تکمیل' : toFa(available) + ' نوبت'}</div>
+    </button>`;
+  }).join('');
+}
+function pickDate(iso){ bState.date = iso; bState.time = null; renderBookingDates(); renderBookingTimes(); }
+
+function renderBookingTimes(){
+  if (!bState.date){ $('bTimes').innerHTML = '<div style="color:#8a7565;font-size:12.5px">ابتدا روز را انتخاب کنید</div>'; return; }
+  $('bTimes').innerHTML = TIME_SLOTS.map(tm => {
+    const available = isSlotAvailable(bState.therapistId, bState.date, tm);
+    const cls = bState.time === tm ? 'active' : (available ? '' : 'disabled');
+    const endTime = addMinutes(tm, 60);
+    return `<button class="chip slot-chip ${cls}" ${available ? `onclick="pickTime('${tm}')"` : 'disabled'}>
+      ${toFaTime(tm)} تا ${toFaTime(endTime)}
+    </button>`;
+  }).join('');
+}
+function pickTime(tm){ bState.time = tm; renderBookingTimes(); }
+
+function setStep(n){
+  document.querySelectorAll('#mBooking .step').forEach(s => s.style.display = 'none');
+  document.querySelector(`#mBooking .step[data-step="${n}"]`).style.display = 'block';
+  const dots = $('bDots').children;
+  for (let i = 0; i < dots.length; i++) dots[i].classList.toggle('on', i < n);
+  if (n === 2){ renderBookingDates(); renderBookingTimes(); }
+  if (n === 3) renderBookingSummary();
+}
+function renderBookingSummary(){
+  const t = getTherapistById(bState.therapistId);
+  $('bSummary').innerHTML = `
+    <div><b>درمانگر:</b><span>${t.name}</span></div>
+    <div><b>نوع جلسه:</b><span>${bState.mode}</span></div>
+    <div><b>تاریخ:</b><span>${faDateFull(bState.date)}</span></div>
+    <div><b>ساعت:</b><span>${toFaTime(bState.time)} تا ${toFaTime(addMinutes(bState.time, 60))}</span></div>
+    <div class="total"><b>هزینه جلسه (پرداخت در مرکز):</b><span>${money(t.price)}</span></div>
+  `;
+}
+function bookNext(step){
+  if (step === 1){
+    const err = $('err1');
+    if (!bState.mode){ err.textContent = 'لطفاً نوع جلسه را انتخاب کنید'; err.classList.add('show'); return; }
+    if (!bState.therapistId){ err.textContent = 'لطفاً یک درمانگر انتخاب کنید'; err.classList.add('show'); return; }
+    err.classList.remove('show');
+    setStep(2);
+  } else if (step === 2){
+    const err = $('err2');
+    if (!bState.date){ err.textContent = 'لطفاً روز را انتخاب کنید'; err.classList.add('show'); return; }
+    if (!bState.time){ err.textContent = 'لطفاً ساعت را انتخاب کنید'; err.classList.add('show'); return; }
+    // چک نهایی — شاید همین الان یکی رزرو کرد
+    if (!isSlotAvailable(bState.therapistId, bState.date, bState.time)){
+      err.textContent = 'متأسفانه این نوبت همین الان پر شد. لطفاً زمان دیگری انتخاب کنید.';
+      err.classList.add('show');
+      renderBookingTimes();
+      return;
+    }
+    err.classList.remove('show');
+    setStep(3);
+  }
+}
+
+async function confirmBooking(){
+  const err = $('err3');
+  const name = $('bName').value.trim();
+  const phone = $('bPhone').value.trim();
+  const note = $('bNote').value.trim();
+  if (name.length < 3){ err.textContent = 'لطفاً نام و نام خانوادگی را کامل وارد کنید'; err.classList.add('show'); return; }
+  if (!/^09\d{9}$/.test(phone)){ err.textContent = 'شماره موبایل باید ۱۱ رقم و با ۰۹ شروع شود'; err.classList.add('show'); return; }
+  if (!isSlotAvailable(bState.therapistId, bState.date, bState.time)){
+    err.textContent = 'این نوبت همین الان پر شد. لطفاً زمان دیگری انتخاب کنید.'; err.classList.add('show');
+    setStep(2); return;
+  }
+  err.classList.remove('show');
+
+  const t = getTherapistById(bState.therapistId);
+  const code = genTrackCode('NK');
+
+  const booking = {
+    id: code,
+    type: 'consultation',
+    therapistId: t.id,
+    therapistName: t.name,
+    therapistPhone: t.phone,
+    date: bState.date,
+    time: bState.time,
+    endTime: addMinutes(bState.time, 60),
+    mode: bState.mode,
+    name, phone, note,
+    price: t.price,
+    paid: 0,
+    status: 'confirmed',
+    createdAt: new Date().toISOString()
+  };
+  saveBooking(booking);
+
+  // پیامک به مراجع
+  const dateFull = faDateFull(bState.date);
+  const timeStr = toFaTime(bState.time) + ' تا ' + toFaTime(addMinutes(bState.time, 60));
+  sendSMS(phone,
+    `${CENTER_NAME}\nرزرو شما با موفقیت ثبت شد ✅\nتاریخ: ${dateFull}\nساعت: ${timeStr}\nدرمانگر: ${t.name}\nنوع: ${bState.mode}\nکد رهگیری: ${code}\nلطفاً ۵ دقیقه قبل حضور داشته باشید.`,
+    { type: 'consultation', to: 'client', code }
+  );
+
+  // پیامک به درمانگر
+  sendSMS(t.phone,
+    `${CENTER_NAME}\nنوبت جدیدی برای شما رزرو شد 🔔\nمراجع: ${name}\nتلفن: ${phone}\nتاریخ: ${dateFull}\nساعت: ${timeStr}\nنوع: ${bState.mode}\nکد: ${code}`,
+    { type: 'consultation', to: 'therapist', code }
+  );
+
+  // نمایش موفقیت
+  $('bTrack').textContent = code;
+  $('bSuccess').innerHTML = `
+    <div><b>درمانگر:</b><span>${t.name}</span></div>
+    <div><b>تاریخ:</b><span>${dateFull}</span></div>
+    <div><b>ساعت:</b><span>${timeStr}</span></div>
+    <div><b>نوع:</b><span>${bState.mode}</span></div>
+    <div class="total"><b>هزینه (پرداخت در مرکز):</b><span>${money(t.price)}</span></div>
+  `;
+  setStep(4);
+  fireConfetti();
+  toast('✅ نوبت شما ثبت شد. پیامک تأیید ارسال گردید.');
+  renderBookingTherapists();
+}
+
+/* =========================================================
+   🎓 سیستم ثبت‌نام کارگاه
+   ========================================================= */
+let wState = { workshopId: null, payType: null };
+
+function openWorkshop(id){
+  const w = getWorkshops().find(x => x.id === id);
+  if (!w) return;
+  if (w.filled >= w.cap){ toast('ظرفیت تکمیل است'); return; }
+  wState = { workshopId: id, payType: null };
+  const inst = getTherapistById(w.instructorId);
+  const timeStr = toFaTime(w.startTime) + ' تا ' + toFaTime(addMinutes(w.startTime, Number(w.duration || 90)));
+  $('wHeadTitle').textContent = 'ثبت‌نام در کارگاه: ' + w.title;
+  $('wHeadSub').textContent = 'مدرس: ' + (inst?.name || '') + ' — ' + faDateFull(w.date);
+  $('wInfo').innerHTML = `
+    <div class="sum-box">
+      <div><b>تاریخ:</b><span>${faDateFull(w.date)}</span></div>
+      <div><b>ساعت:</b><span>${timeStr}</span></div>
+      <div><b>تعداد جلسات:</b><span>${w.sessions}</span></div>
+      <div class="total"><b>قیمت کل:</b><span>${money(w.price)}</span></div>
+    </div>
+  `;
+  document.querySelectorAll('#wPayTypes .chip').forEach(c => c.classList.remove('active'));
+  $('wPayInfo').innerHTML = 'لطفاً نحوه پرداخت را انتخاب کنید';
+  $('wName').value = ''; $('wPhone').value = '';
+  $('wErr').classList.remove('show');
+  openModal('mWorkshop');
+}
+function selectWPayType(type, btn){
+  wState.payType = type;
+  document.querySelectorAll('#wPayTypes .chip').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+  const w = getWorkshops().find(x => x.id === wState.workshopId);
+  if (type === 'deposit'){
+    const dep = Math.round(w.price * 0.2);
+    $('wPayInfo').innerHTML = `
+      <div style="background:#fdf3dd;border:1px solid #f4dcab;border-radius:10px;padding:10px 12px;color:#a86a1f">
+        💳 <b>پیش‌پرداخت ۲۰٪:</b> ${money(dep)}<br>
+        <span style="font-size:11.5px">مابقی (${money(w.price - dep)}) روز شروع کارگاه در مرکز کارت بکشید.</span>
+      </div>`;
+  } else {
+    $('wPayInfo').innerHTML = `
+      <div style="background:#dcf0e3;border:1px solid #b8dcc4;border-radius:10px;padding:10px 12px;color:#2f8a67">
+        ✅ <b>پرداخت کامل آنلاین:</b> ${money(w.price)}<br>
+        <span style="font-size:11.5px">بدون نیاز به پرداخت حضوری.</span>
+      </div>`;
+  }
+}
+async function confirmWorkshop(){
+  const err = $('wErr');
+  const w = getWorkshops().find(x => x.id === wState.workshopId);
+  if (!w){ err.textContent = 'کارگاه یافت نشد'; err.classList.add('show'); return; }
+  if (!wState.payType){ err.textContent = 'لطفاً نحوه پرداخت را انتخاب کنید'; err.classList.add('show'); return; }
+  const name = $('wName').value.trim();
+  const phone = $('wPhone').value.trim();
+  if (name.length < 3){ err.textContent = 'لطفاً نام کامل را وارد کنید'; err.classList.add('show'); return; }
+  if (!/^09\d{9}$/.test(phone)){ err.textContent = 'شماره موبایل معتبر نیست'; err.classList.add('show'); return; }
+  if (w.filled >= w.cap){ err.textContent = 'ظرفیت تکمیل شد'; err.classList.add('show'); return; }
+  err.classList.remove('show');
+
+  const total = w.price;
+  const paid = wState.payType === 'full' ? total : Math.round(total * 0.2);
+  const remaining = total - paid;
+  const code = genTrackCode('WK');
+
+  const inst = getTherapistById(w.instructorId);
+
+  // ثبت‌نام
+  const booking = {
+    id: code, type: 'workshop',
+    workshopId: w.id, title: w.title,
+    instructorId: w.instructorId,
+    instructorName: inst?.name || '',
+    instructorPhone: inst?.phone || '',
+    date: w.date, startTime: w.startTime,
+    duration: w.duration,
+    name, phone,
+    price: total, paid, remaining,
+    paymentType: wState.payType,
+    status: 'confirmed',
+    createdAt: new Date().toISOString()
+  };
+  saveBooking(booking);
+
+  // افزایش ظرفیت
+  const all = getWorkshops();
+  const idx = all.findIndex(x => x.id === w.id);
+  if (idx >= 0){ all[idx].filled = (all[idx].filled || 0) + 1; saveWorkshops(all); }
+
+  // پیامک‌ها
+  const dateStr = faDateFull(w.date);
+  const timeStr = toFaTime(w.startTime) + ' تا ' + toFaTime(addMinutes(w.startTime, Number(w.duration || 90)));
+
+  sendSMS(phone,
+    `${CENTER_NAME}\nثبت‌نام شما در کارگاه «${w.title}» انجام شد ✅\nتاریخ شروع: ${dateStr}\nساعت: ${timeStr}\nمدرس: ${inst?.name || ''}\nپرداخت‌شده: ${money(paid)}${remaining > 0 ? '\nباقیمانده (در مرکز): ' + money(remaining) : ''}\nکد رهگیری: ${code}`,
+    { type: 'workshop', to: 'client', code }
+  );
+
+  if (inst?.phone){
+    sendSMS(inst.phone,
+      `${CENTER_NAME}\nثبت‌نام جدید در کارگاه «${w.title}» 🔔\nشرکت‌کننده: ${name}\nتلفن: ${phone}\nتاریخ شروع: ${dateStr}\nساعت: ${timeStr}\nتعداد شرکت‌کنندگان فعلی: ${w.filled + 1}/${w.cap}`,
+      { type: 'workshop', to: 'instructor', code }
+    );
+  }
+
+  // نمایش موفقیت
+  $('wTrack').textContent = code;
+  $('wSuccess').innerHTML = `
+    <div><b>کارگاه:</b><span>${w.title}</span></div>
+    <div><b>تاریخ شروع:</b><span>${dateStr}</span></div>
+    <div><b>ساعت:</b><span>${timeStr}</span></div>
+    <div><b>پرداخت‌شده:</b><span>${money(paid)}</span></div>
+    ${remaining > 0 ? `<div class="total"><b>باقیمانده (در مرکز):</b><span>${money(remaining)}</span></div>` : '<div class="total"><b>وضعیت:</b><span>پرداخت کامل ✅</span></div>'}
+  `;
+  closeModal('mWorkshop');
+  openModal('mWorkshopOk');
+  fireConfetti();
+  renderWorkshops();
+}
+
+/* =========================================================
+   🛡️ پنل ادمین
+   ========================================================= */
+function openAdmin(){
+  $('adminPage').classList.add('show');
+  document.body.style.overflow = 'hidden';
+  if (ls.get('adminLoggedIn', false)) renderAdminDash();
+  else renderAdminLogin();
+}
+function exitAdmin(){
+  $('adminPage').classList.remove('show');
+  document.body.style.overflow = '';
+}
+function adminLogout(){
+  ls.set('adminLoggedIn', false);
+  renderAdminLogin();
+}
+function renderAdminLogin(){
+  $('adminContent').innerHTML = `
+    <div class="admin-login">
+      <div style="font-size:44px;margin-bottom:12px">🔐</div>
+      <h2>ورود به پنل مدیریت</h2>
+      <p>نام کاربری و رمز عبور را وارد کنید</p>
+      <input id="adminUser" placeholder="نام کاربری" autocomplete="username" />
+      <input id="adminPass" type="password" placeholder="رمز عبور" autocomplete="current-password" />
+      <div class="err" id="adminErr"></div>
+      <button class="btn btn-primary btn-block" onclick="adminLogin()">ورود</button>
+    </div>
+  `;
+  setTimeout(() => $('adminUser')?.focus(), 100);
+}
+function adminLogin(){
+  const u = $('adminUser').value.trim();
+  const p = $('adminPass').value;
+  if (u === ADMIN_CREDENTIALS.username && p === ADMIN_CREDENTIALS.password){
+    ls.set('adminLoggedIn', true);
+    renderAdminDash();
+  } else {
+    const e = $('adminErr');
+    e.textContent = 'نام کاربری یا رمز عبور اشتباه است';
+    e.classList.add('show');
+  }
+}
+
+let adminCurrentTab = 'dash';
+function renderAdminDash(){
+  $('adminContent').innerHTML = `
+    <div class="admin-tabs">
+      <button class="admin-tab ${adminCurrentTab==='dash'?'active':''}" onclick="switchAdminTab('dash')">📊 داشبورد</button>
+      <button class="admin-tab ${adminCurrentTab==='bookings'?'active':''}" onclick="switchAdminTab('bookings')">📅 رزروها</button>
+      <button class="admin-tab ${adminCurrentTab==='workshops'?'active':''}" onclick="switchAdminTab('workshops')">🎓 کارگاه‌ها</button>
+      <button class="admin-tab ${adminCurrentTab==='therapists'?'active':''}" onclick="switchAdminTab('therapists')">👩‍⚕️ درمانگرها</button>
+      <button class="admin-tab" style="margin-inline-start:auto;background:#fdeeee;color:#b84848;border-color:#f3cccc" onclick="adminLogout()">🚪 خروج</button>
+    </div>
+    <div id="adminTabContent"></div>
+  `;
+  renderAdminTabContent();
+}
+function switchAdminTab(name){ adminCurrentTab = name; renderAdminDash(); }
+function renderAdminTabContent(){
+  const c = $('adminTabContent');
+  if (adminCurrentTab === 'dash') c.innerHTML = adminDashHTML();
+  else if (adminCurrentTab === 'bookings') c.innerHTML = adminBookingsHTML();
+  else if (adminCurrentTab === 'workshops') c.innerHTML = adminWorkshopsHTML();
+  else if (adminCurrentTab === 'therapists') c.innerHTML = adminTherapistsHTML();
+}
+
+function getStats(period){
+  const all = getBookings();
+  const now = new Date();
+  let cutoff;
+  if (period === 'day'){ cutoff = new Date(now.getFullYear(), now.getMonth(), now.getDate()); }
+  else if (period === 'week'){ cutoff = new Date(now.getTime() - 7*24*60*60*1000); }
+  else if (period === 'month'){ cutoff = new Date(now.getTime() - 30*24*60*60*1000); }
+  else { cutoff = new Date(0); }
+  const filtered = all.filter(b => new Date(b.createdAt) >= cutoff && b.status !== 'cancelled');
+  const consults = filtered.filter(b => b.type === 'consultation');
+  const workshopsB = filtered.filter(b => b.type === 'workshop');
+  const received = filtered.reduce((s, b) => s + (Number(b.paid) || 0), 0);
+  const estimated = filtered.reduce((s, b) => s + (Number(b.price) || 0), 0);
+  return { count: filtered.length, consults: consults.length, workshops: workshopsB.length, received, estimated, list: filtered };
+}
+
+function adminDashHTML(){
+  const day = getStats('day');
+  const week = getStats('week');
+  const month = getStats('month');
+  const recent = getBookings().slice(-10).reverse();
+  return `
+    <div class="stat-cards">
+      <div class="stat-card hl">
+        <h4>📅 امروز</h4>
+        <div class="big">${toFa(day.count)} رزرو</div>
+        <div class="sub">مشاوره: ${toFa(day.consults)} | کارگاه: ${toFa(day.workshops)}</div>
+        <div class="sub" style="margin-top:8px;color:#2f8a67">💰 دریافتی: ${money(day.received)}</div>
+        <div class="sub" style="color:#a86a1f">📊 تخمینی: ${money(day.estimated)}</div>
+      </div>
+      <div class="stat-card">
+        <h4>🗓️ هفته اخیر</h4>
+        <div class="big">${toFa(week.count)} رزرو</div>
+        <div class="sub">مشاوره: ${toFa(week.consults)} | کارگاه: ${toFa(week.workshops)}</div>
+        <div class="sub" style="margin-top:8px;color:#2f8a67">💰 دریافتی: ${money(week.received)}</div>
+        <div class="sub" style="color:#a86a1f">📊 تخمینی: ${money(week.estimated)}</div>
+      </div>
+      <div class="stat-card">
+        <h4>📆 ماه اخیر</h4>
+        <div class="big">${toFa(month.count)} رزرو</div>
+        <div class="sub">مشاوره: ${toFa(month.consults)} | کارگاه: ${toFa(month.workshops)}</div>
+        <div class="sub" style="margin-top:8px;color:#2f8a67">💰 دریافتی: ${money(month.received)}</div>
+        <div class="sub" style="color:#a86a1f">📊 تخمینی: ${money(month.estimated)}</div>
+      </div>
+    </div>
+
+    <h3 style="font-size:14px;font-weight:900;margin:22px 0 12px">🕐 ۱۰ رزرو اخیر</h3>
+    ${recent.length === 0 ? '<div class="admin-empty">هنوز رزروی ثبت نشده است</div>' : `
+    <table class="admin-table">
+      <thead><tr><th>کد</th><th>نوع</th><th>تاریخ</th><th>ساعت</th><th>مراجع</th><th>مبلغ</th><th>وضعیت</th></tr></thead>
+      <tbody>
+        ${recent.map(b => `
+          <tr>
+            <td style="direction:ltr;font-family:monospace">${b.id}</td>
+            <td>${b.type === 'consultation' ? '👤 مشاوره' : '🎓 کارگاه'}</td>
+            <td>${faDateShort(b.date)}</td>
+            <td>${toFaTime(b.type === 'consultation' ? b.time : b.startTime)}</td>
+            <td>${b.name}</td>
+            <td>${money(b.price)}</td>
+            <td><span class="status ${b.status === 'cancelled' ? 'cancelled' : 'confirmed'}">${b.status === 'cancelled' ? 'لغو' : 'تأیید'}</span></td>
+          </tr>
+        `).join('')}
+      </tbody>
+    </table>`}
+  `;
+}
+
+function adminBookingsHTML(){
+  const all = getBookings().slice().reverse();
+  if (!all.length) return '<div class="admin-empty">هنوز رزروی ثبت نشده است</div>';
+  return `
+    <table class="admin-table">
+      <thead>
+        <tr><th>کد</th><th>نوع</th><th>تاریخ</th><th>ساعت</th><th>درمانگر</th><th>مراجع</th><th>تلفن</th><th>مبلغ</th><th>پرداخت</th><th>وضعیت</th><th>عملیات</th></tr>
+      </thead>
+      <tbody>
+        ${all.map(b => `
+          <tr>
+            <td style="direction:ltr;font-family:monospace;font-size:10.5px">${b.id}</td>
+            <td>${b.type === 'consultation' ? '👤 مشاوره' : '🎓 کارگاه'}</td>
+            <td>${faDateShort(b.date)}</td>
+            <td>${toFaTime(b.type === 'consultation' ? b.time : b.startTime)}</td>
+            <td>${b.type === 'consultation' ? b.therapistName : b.instructorName}</td>
+            <td>${b.name}</td>
+            <td style="direction:ltr">${b.phone}</td>
+            <td>${money(b.price)}</td>
+            <td><span class="status ${b.paid >= b.price ? 'paid' : 'unpaid'}">${money(b.paid)}</span></td>
+            <td><span class="status ${b.status === 'cancelled' ? 'cancelled' : 'confirmed'}">${b.status === 'cancelled' ? 'لغو' : 'تأیید'}</span></td>
+            <td>
+              ${b.status !== 'cancelled' ? `<button class="action-btn" onclick="markPaid('${b.id}')">تأیید پرداخت</button>` : ''}
+              ${b.status !== 'cancelled' ? `<button class="action-btn danger" onclick="cancelBooking('${b.id}')">لغو</button>` : ''}
+            </td>
+          </tr>
+        `).join('')}
+      </tbody>
+    </table>
+    <div style="text-align:center;margin-top:16px">
+      <button class="btn btn-ghost" style="font-size:12px;padding:8px 18px" onclick="exportBookings()">📥 خروجی JSON</button>
+    </div>
+  `;
+}
+
+function markPaid(id){
+  const all = getBookings();
+  const b = all.find(x => x.id === id);
+  if (!b) return;
+  b.paid = b.price;
+  b.paidAt = new Date().toISOString();
+  ls.set('bookings', all);
+  toast('✅ پرداخت تأیید شد');
+  renderAdminTabContent();
+}
+function cancelBooking(id){
+  if (!confirm('آیا از لغو این رزرو مطمئن هستید؟')) return;
+  const all = getBookings();
+  const b = all.find(x => x.id === id);
+  if (!b) return;
+  b.status = 'cancelled';
+  // اگر کارگاه بود، ظرفیت آزاد شود
+  if (b.type === 'workshop'){
+    const ws = getWorkshops();
+    const w = ws.find(x => x.id === b.workshopId);
+    if (w) w.filled = Math.max(0, (w.filled || 1) - 1);
+    saveWorkshops(ws);
+  }
+  ls.set('bookings', all);
+  toast('❌ رزرو لغو شد');
+  renderAdminTabContent();
+}
+function exportBookings(){
+  const data = JSON.stringify(getBookings(), null, 2);
+  const blob = new Blob([data], { type: 'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'bookings-' + new Date().toISOString().slice(0,10) + '.json';
+  a.click();
+}
+
+function adminWorkshopsHTML(){
+  const ws = getWorkshops();
+  return `
+    <div style="display:flex;gap:8px;margin-bottom:16px">
+      <button class="btn btn-primary" style="font-size:12.5px;padding:10px 20px" onclick="openEditWorkshop()">➕ کارگاه جدید</button>
+    </div>
+    ${ws.length === 0 ? '<div class="admin-empty">کارگاهی ثبت نشده</div>' : ws.map(w => {
+      const inst = getTherapistById(w.instructorId);
+      return `
+      <div class="list-item">
+        <div class="info">
+          <b>${w.emoji} ${w.title}</b>
+          <small>مدرس: ${inst?.name || '—'} · ${faDateFull(w.date)} · ${toFaTime(w.startTime)} تا ${toFaTime(addMinutes(w.startTime, Number(w.duration || 90)))}</small>
+          <small>ظرفیت: ${toFa(w.filled)}/${toFa(w.cap)} · قیمت: ${money(w.price)}</small>
+        </div>
+        <button class="action-btn" onclick="openEditWorkshop('${w.id}')">✏️ ویرایش</button>
+        <button class="action-btn danger" onclick="deleteWorkshop('${w.id}')">🗑️ حذف</button>
+      </div>`;
+    }).join('')}
+  `;
+}
+function openEditWorkshop(id){
+  const ws = getWorkshops();
+  const w = id ? ws.find(x => x.id === id) : null;
+  $('ewTitle').textContent = w ? 'ویرایش کارگاه' : 'کارگاه جدید';
+  $('ewTitleIn').value = w?.title || '';
+  $('ewEmoji').value = w?.emoji || '🎓';
+  $('ewSessions').value = w?.sessions || '۴ جلسه';
+  $('ewDate').value = w?.date || '';
+  $('ewStart').value = w?.startTime || '16:00';
+  $('ewDuration').value = w?.duration || 90;
+  $('ewCap').value = w?.cap || 20;
+  $('ewFilled').value = w?.filled || 0;
+  $('ewPrice').value = w?.price || 1000000;
+  $('ewDesc').value = w?.desc || '';
+  $('ewErr').classList.remove('show');
+
+  const opts = getTherapists().map(t => `<option value="${t.id}" ${w?.instructorId === t.id ? 'selected' : ''}>${t.name}</option>`).join('');
+  $('ewInstructor').innerHTML = opts;
+
+  $('mEditWorkshop').dataset.id = w?.id || '';
+  openModal('mEditWorkshop');
+}
+function saveWorkshop(){
+  const err = $('ewErr');
+  const title = $('ewTitleIn').value.trim();
+  const instructorId = $('ewInstructor').value;
+  const date = $('ewDate').value;
+  const startTime = $('ewStart').value;
+  if (!title){ err.textContent = 'عنوان کارگاه را وارد کنید'; err.classList.add('show'); return; }
+  if (!date){ err.textContent = 'تاریخ را وارد کنید'; err.classList.add('show'); return; }
+  if (!startTime){ err.textContent = 'ساعت شروع را وارد کنید'; err.classList.add('show'); return; }
+  err.classList.remove('show');
+
+  const ws = getWorkshops();
+  const id = $('mEditWorkshop').dataset.id;
+  const newW = {
+    id: id || 'w' + Date.now(),
+    title,
+    instructorId,
+    emoji: $('ewEmoji').value.trim() || '🎓',
+    date,
+    startTime,
+    duration: Number($('ewDuration').value) || 90,
+    sessions: $('ewSessions').value.trim() || '۴ جلسه',
+    price: Number($('ewPrice').value) || 0,
+    cap: Number($('ewCap').value) || 20,
+    filled: Number($('ewFilled').value) || 0,
+    desc: $('ewDesc').value.trim()
+  };
+  if (id){
+    const idx = ws.findIndex(x => x.id === id);
+    if (idx >= 0) ws[idx] = newW;
+  } else {
+    ws.push(newW);
+  }
+  saveWorkshops(ws);
+  closeModal('mEditWorkshop');
+  toast('✅ ذخیره شد');
+  renderAdminTabContent();
+  renderWorkshops();
+}
+function deleteWorkshop(id){
+  if (!confirm('حذف این کارگاه؟')) return;
+  const ws = getWorkshops().filter(x => x.id !== id);
+  saveWorkshops(ws);
+  toast('🗑️ حذف شد');
+  renderAdminTabContent();
+  renderWorkshops();
+}
+
+function adminTherapistsHTML(){
+  const list = getTherapists();
+  return `
+    <div style="font-size:12px;color:#8a7565;margin-bottom:12px">ویرایش قیمت جلسه (تومان) و شماره موبایل دریافت پیامک</div>
+    ${list.map(t => `
+      <div class="list-item">
+        <div class="info">
+          <b>${t.name}</b>
+          <small>${t.title}</small>
+        </div>
+        <div class="price-edit">
+          <label style="font-size:11px;color:#8a7565;margin-inline-end:4px">قیمت:</label>
+          <input type="number" id="price_${t.id}" value="${t.price}" step="10000" />
+          <button onclick="saveTherapistPrice('${t.id}')">ذخیره</button>
+        </div>
+        <div class="price-edit">
+          <label style="font-size:11px;color:#8a7565;margin-inline-end:4px">موبایل:</label>
+          <input type="text" id="phone_${t.id}" value="${t.phone || ''}" style="width:130px" class="ltr" />
+          <button onclick="saveTherapistPhone('${t.id}')">ذخیره</button>
+        </div>
+      </div>
+    `).join('')}
+  `;
+}
+function saveTherapistPrice(id){
+  const v = Number($('price_' + id).value);
+  if (!v || v < 0){ toast('قیمت معتبر نیست'); return; }
+  const ov = ls.get('therapistOverrides', {});
+  ov[id] = { ...(ov[id] || {}), price: v };
+  ls.set('therapistOverrides', ov);
+  toast('✅ قیمت ذخیره شد');
+  renderTherapists();
+}
+function saveTherapistPhone(id){
+  const v = $('phone_' + id).value.trim();
+  if (!/^09\d{9}$/.test(v)){ toast('شماره موبایل معتبر نیست (۰۹xxxxxxxxx)'); return; }
+  const ov = ls.get('therapistOverrides', {});
+  ov[id] = { ...(ov[id] || {}), phone: v };
+  ls.set('therapistOverrides', ov);
+  toast('✅ شماره ذخیره شد');
+}
+
+/* =========================================================
+   کانفتی
+   ========================================================= */
+function fireConfetti(){
+  const canvas = $('confettiCanvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  const colors = ['#e07856','#e9b44c','#7ba098','#e8a0a0','#ec9b7a'];
+  const particles = [];
+  for (let i = 0; i < 80; i++){
+    particles.push({
+      x: Math.random() * canvas.width,
+      y: -20 - Math.random() * 100,
+      vx: (Math.random() - 0.5) * 4,
+      vy: 2 + Math.random() * 4,
+      size: 5 + Math.random() * 6,
+      color: pick(colors),
+      rot: Math.random() * Math.PI,
+      vr: (Math.random() - 0.5) * 0.2
+    });
+  }
+  let frame = 0;
+  function draw(){
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(p => {
+      p.x += p.vx; p.y += p.vy; p.vy += 0.08; p.rot += p.vr;
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.rot);
+      ctx.fillStyle = p.color;
+      ctx.fillRect(-p.size/2, -p.size/2, p.size, p.size);
+      ctx.restore();
+    });
+    frame++;
+    if (frame < 120) requestAnimationFrame(draw);
+    else ctx.clearRect(0, 0, canvas.width, canvas.height);
+  }
+  draw();
+}
+
+/* =========================================================
+   Init
+   ========================================================= */
+function init(){
+  renderTherapists();
+  renderWorkshops();
+  renderStories();
+  loadWall();
+  renderFaq();
+  loadJournal();
+  loadJournalMoodBadge();
+  observeReveals();
+
+  const mood = ls.get('mood', null);
+  if (mood) applyMoodTheme(mood);
+
+  if (!ls.get('moodSkipped', false) && !mood){
+    setTimeout(() => showMoodPicker(), 1200);
+  }
+}
+init();
+</script>
+
+<!--
+=============================================================
+📌 راهنمای بک‌اند پیامک (PHP) — برای SMS_CONFIG.proxyUrl
+=============================================================
+
+فایل sms.php را در هاست خود بسازید و SMS_CONFIG.proxyUrl را
+به آدرس آن تنظیم کنید. نمونه با پنل کاوه‌نگار:
+
+<?php
+header('Content-Type: application/json');
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: POST');
+header('Access-Control-Allow-Headers: Content-Type');
+
+$data = json_decode(file_get_contents('php://input'), true);
+$to = preg_replace('/[^0-9]/', '', $data['to'] ?? '');
+$msg = $data['message'] ?? '';
+
+// ← اطلاعات پنل خودتان را اینجا بگذارید
+$API_KEY = 'YOUR_KAVENEGAR_API_KEY';
+$SENDER  = '10004346';
+
+if (!$to || !$msg){ echo json_encode(['ok'=>false]); exit; }
+
+$url = "https://api.kavenegar.com/v1/{$API_KEY}/sms/send.json";
+$post = http_build_query([
+  'receptor' => $to,
+  'sender'   => $SENDER,
+  'message'  => $msg
+]);
+$ch = curl_init($url);
+curl_setopt_array($ch, [
+  CURLOPT_POST => true,
+  CURLOPT_POSTFIELDS => $post,
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_TIMEOUT => 10
+]);
+$result = curl_exec($ch);
+curl_close($ch);
+echo $result;
+
+=============================================================
+📌 نکته درباره ذخیره‌سازی در بک‌اند
+=============================================================
+برای کار واقعی چند کاربره، به جای `ls.get('bookings')` باید از API
+بک‌اند استفاده کنید. توابع `getBookings()` و `saveBooking()` را
+به fetch به بک‌اند خود تغییر دهید. نمونه ساختار:
+
+GET  /api/bookings?date=2026-11-16&therapist=zeinab
+POST /api/bookings  { date, time, therapistId, name, phone, ... }
+
+با این کار تداخل هم به صورت اتمی روی سرور بررسی می‌شود و
+دو نفر همزمان نمی‌توانند یک نوبت را رزرو کنند.
+-->
+</body>
+</html>
